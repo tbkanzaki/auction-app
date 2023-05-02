@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuario visita página inicial' do
+describe 'Usuário visita página inicial' do
   it 'e vê o nome da aplicação' do
     # Arrange
     

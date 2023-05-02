@@ -10,6 +10,20 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav>
+        <% if user_signed_in? %>
+          |<%= current_user.name %> - <%= current_user.email %> 
+          <%= link_to 'Sair', root_path %> 
+        <% else %>
+          <%= link_to 'Entrar', new_user_session_path %> 
+        <% end %>
+      </nav>
+    </header>
+    <main>
+      <div><%= alert %></div>
+      <div><%= notice %></div>
+      <%= yield %>
+    </main>
   </body>
 </html>
