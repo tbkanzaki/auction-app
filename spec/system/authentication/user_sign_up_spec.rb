@@ -25,6 +25,8 @@ describe 'Usuário admin se autentica e faz cadastro' do
       user = User.last
       expect(user.name).to eq 'Tereza Barros'
       expect(page).to have_content "#{user.name} - tereza@leilaodogalpao.com.br"
+      #expect(user.admin).to be true
+      expect(page).to have_content 'administrador'
     end
   end
 

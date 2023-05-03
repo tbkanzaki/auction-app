@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :cpf, presence: true
   validates :cpf, uniqueness: true
   validate :check_cpf
+  before_create :set_admin
   
   def valida_cpf
     return false if self.cpf.nil?
@@ -36,4 +37,9 @@ class User < ApplicationRecord
     end
   end
   
+  #private
+
+  def set_admin
+    self.admin = true if self.email.include?('@leilaodogalpao.com.br')
+  end
 end
