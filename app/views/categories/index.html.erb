@@ -1,0 +1,38 @@
+<div class="container shadow p-2 mb-4 bg-body-tertiary rounded div-max-width">
+  <h5 class="text-center">Categorias</h5>
+</div>
+
+<div class="container text-center text-danger div-max-width">
+<% if @category.errors.any? %>
+  <dl>
+    <% @category.errors.full_messages.each do |msg| %>
+      <dt><%= msg %></dt>
+    <% end %>
+  </dl>
+<% end %>
+</div>
+
+<div class="container div-max-width">
+  <%= render 'form' %>
+</div>
+
+<div class="container div-max-width p-2" >
+  <% if @categories.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Categorias</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Não existem categorias cadastradas</p>
+  <% end %>
+</div>

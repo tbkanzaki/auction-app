@@ -17,7 +17,7 @@ describe 'Usuário se autentica' do
     # Assert
     expect(page).to have_content 'Login efetuado com sucesso.'
     within('nav') do
-      expect(page).to have_content 'Cadastrar Categoria'
+      expect(page).to have_content 'Categorias'
       expect(page).to have_content 'administrador'
       expect(page).to have_content 'Tereza Barros - tereza@leilaodogalpao.com.br'
       expect(page).not_to have_link 'Entrar'

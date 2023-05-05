@@ -24,7 +24,7 @@ describe 'Usuário se cadastra' do
       expect(page).to have_button 'Sair'
       expect(page).to have_content "Tereza Barros - tereza@leilaodogalpao.com.br"
       expect(page).to have_content 'administrador'
-      expect(page).to have_content 'Cadastrar Categoria'
+      expect(page).to have_content 'Categorias'
     end
   end
 

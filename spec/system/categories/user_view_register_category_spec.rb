@@ -8,7 +8,7 @@ describe 'Usuário visita tela de categoria' do
     #Act
     login_as(user)
     visit root_path
-    visit new_category_path
+    visit categories_path
 
     # Assert
     expect(page).not_to have_field('Nome')
@@ -22,9 +22,11 @@ describe 'Usuário visita tela de categoria' do
     #Act
     login_as(user)
     visit root_path
-    click_on 'Cadastrar Categoria'
+    #visit categories_path
+    click_on 'Categorias'
 
     # Assert
+    expect(page).to have_content 'Categorias'
     expect(page).to have_field('Nome')
   end
 
@@ -35,12 +37,12 @@ describe 'Usuário visita tela de categoria' do
     #Act
     login_as(user)
     visit root_path
-    click_on 'Cadastrar Categoria'
+    click_on 'Categorias'
     fill_in 'Nome', with: 'Eletrodoméstico'
     click_on 'Salvar'
     
     #Assert
-    expect(current_path).to eq root_path
+    expect(current_path).to eq categories_path
     expect(page).to have_content 'Categoria cadastrada com sucesso.'
   end
 
@@ -50,11 +52,12 @@ describe 'Usuário visita tela de categoria' do
     #Act
     login_as(user)
     visit root_path
-    click_on 'Cadastrar Categoria'
+    click_on 'Categorias'
     fill_in 'Nome', with: ''
     click_on 'Salvar'
     
     #Assert
+    expect(current_path).to eq categories_path
     expect(page).to have_content 'Categoria não cadastrada.'
     expect(page).to have_content 'Nome não pode ficar em branco'
   end
