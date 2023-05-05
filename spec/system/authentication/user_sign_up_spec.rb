@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário admin se autentica e faz cadastro' do
-  it 'com sucesso' do
+describe 'Usuário se cadastra' do
+  it 'com sucesso como admin' do
     # Arrange
     
     # Act
@@ -9,11 +9,38 @@ describe 'Usuário admin se autentica e faz cadastro' do
     click_on 'Entrar'
     click_on 'Criar conta'
     within('form') do
+      fill_in 'Nome', with: 'Tereza Barros'
+      fill_in 'CPF', with: '56685728701'
       fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
       fill_in 'Senha', with: 'senha1234'
       fill_in 'Confirme sua senha', with: 'senha1234'
-      fill_in 'Nome', with: 'Tereza Barros'
-      fill_in 'CPF', with: '380.013.572-87'
+     click_on 'Criar conta'
+    end
+
+    # Assert
+    expect(page).to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
+    within('nav') do
+      expect(page).not_to have_link 'Entrar'
+      expect(page).to have_button 'Sair'
+      expect(page).to have_content "Tereza Barros - tereza@leilaodogalpao.com.br"
+      expect(page).to have_content 'administrador'
+      expect(page).to have_content 'Cadastrar Categoria'
+    end
+  end
+
+  it 'com sucesso como visitante' do
+    # Arrange
+    
+    # Act
+    visit('/') 
+    click_on 'Entrar'
+    click_on 'Criar conta'
+    within('form') do
+      fill_in 'Nome', with: 'Maria Sousa'
+      fill_in 'CPF', with: '66610881090'
+      fill_in 'E-mail', with: 'maria@provedor.com'
+      fill_in 'Senha', with: 'senha1234'
+      fill_in 'Confirme sua senha', with: 'senha1234'
       click_on 'Criar conta'
     end
 
@@ -22,11 +49,9 @@ describe 'Usuário admin se autentica e faz cadastro' do
     within('nav') do
       expect(page).not_to have_link 'Entrar'
       expect(page).to have_button 'Sair'
-      user = User.last
-      expect(user.name).to eq 'Tereza Barros'
-      expect(page).to have_content "#{user.name} - tereza@leilaodogalpao.com.br"
-      #expect(user.admin).to be true
-      expect(page).to have_content 'administrador'
+      expect(page).to have_content "Maria Sousa - maria@provedor.com"
+      expect(page).to have_content 'visitante'
+      expect(page).not_to have_content 'Cadastrar Categoria'
     end
   end
 
@@ -38,14 +63,17 @@ describe 'Usuário admin se autentica e faz cadastro' do
     click_on 'Entrar'
     click_on 'Criar conta'
     within('form') do
+      fill_in 'Nome', with: ''
+      fill_in 'CPF', with: ''
       fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
       fill_in 'Senha', with: 'senha1234'
       fill_in 'Confirme sua senha', with: 'senha1234'
-      fill_in 'CPF', with: ''
+
       click_on 'Criar conta'
     end
 
     # Assert
+    expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'CPF não pode ficar em branco'
     expect(page).to have_content 'Não foi possível salvar usuário'
     expect(page).not_to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
@@ -59,16 +87,40 @@ describe 'Usuário admin se autentica e faz cadastro' do
     click_on 'Entrar'
     click_on 'Criar conta'
     within('form') do
+      fill_in 'Nome', with: 'Tereza Barros'
+      fill_in 'CPF', with: '56685723301'
       fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
       fill_in 'Senha', with: 'senha1234'
       fill_in 'Confirme sua senha', with: 'senha1234'
-      fill_in 'Nome', with: 'Tereza Barros'
-      fill_in 'CPF', with: '380.013.031-41'
       click_on 'Criar conta'
     end
 
     # Assert
     expect(page).to have_content 'CPF inválido'
+    expect(page).to have_content 'Não foi possível salvar usuário'
+    expect(page).not_to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
+  end
+
+  it 'com cpf já existente' do
+    # Arrange
+    User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
+
+    # Act
+    visit('/') 
+    click_on 'Entrar'
+    click_on 'Criar conta'
+    within('form') do
+      fill_in 'Nome', with: 'Maria Sousa'
+      fill_in 'CPF', with: '56685723301'
+      fill_in 'E-mail', with: 'maria@provedor.com'
+      fill_in 'Senha', with: 'senha1234'
+      fill_in 'Confirme sua senha', with: 'senha1234'
+      click_on 'Criar conta'
+    end
+
+    # Assert
+    expect(page).to have_content 'CPF inválido'
+    expect(page).to have_content 'Não foi possível salvar usuário'
     expect(page).not_to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
   end
 end

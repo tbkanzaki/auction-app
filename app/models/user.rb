@@ -4,11 +4,19 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
  
-  validates :cpf, presence: true
+  validates :name, :cpf, presence: true
   validates :cpf, uniqueness: true
   validate :check_cpf
   before_create :set_admin
-  
+
+  def perfil
+    if self.admin?
+      'administrador'
+    else
+      'visitante'
+    end
+  end
+
   def valida_cpf
     return false if self.cpf.nil?
   
@@ -37,7 +45,7 @@ class User < ApplicationRecord
     end
   end
   
-  #private
+  private
 
   def set_admin
     self.admin = true if self.email.include?('@leilaodogalpao.com.br')

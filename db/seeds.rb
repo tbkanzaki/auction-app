@@ -1,1 +1,5 @@
-User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '38001357287')
+User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
+User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
+Category.create!(name: 'Eletrodoméstico')
+Category.create!(name: 'Esporte/Lazer')
+Category.create!(name: 'Celular')

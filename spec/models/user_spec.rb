@@ -1,11 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe '#perfil' do
+  it 'exibe o perfil do usuário administrador' do
+    # Arrange
+    user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
+
+    # Act
+    result = user.perfil()
+
+    # Assert
+    expect(result).to eq('administrador')
+  end
+
+  it 'exibe o perfil do usuário visitante' do
+    # Arrange
+    user = user = User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
+
+    # Act
+    result = user.perfil()
+
+    # Assert
+    expect(result).to eq('visitante')
+  end
+end
+
   describe '#valid?' do
     it 'false quando o cpf já está em uso' do
       # Arrange
-      user_tereza = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '38001357287')
-      user_maria = User.new(name: 'Maria Silva', email:'maria@leilaodogalpao.com.br', password:'senha1234', cpf: '38001357287')
+      user_tereza = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
+      user_maria = User.new(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '56685728701')
 
       # Act
       result = user_maria.valid?
@@ -28,7 +52,7 @@ RSpec.describe User, type: :model do
 
     it 'true (errors.include) quando o cpf é inválido' do
       # Arrange
-      user = User.new(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '380.013.031-41')
+      user = User.new(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728331')
 
       # Act
       user.valid?
