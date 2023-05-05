@@ -22,17 +22,16 @@ describe 'Usuário visita tela de categoria' do
     #Act
     login_as(user)
     visit root_path
-    #visit categories_path
     click_on 'Categorias'
 
     # Assert
-    expect(page).to have_content 'Categorias'
+    expect(page).to have_content 'Cadastrar Categorias'
     expect(page).to have_field('Nome')
   end
 
-  it 'e faz cadastro com sucesso com sucesso' do
+  it 'e administrador faz cadastro com sucesso' do
     #Arrange
-    user = user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
+    user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
 
     #Act
     login_as(user)
@@ -46,7 +45,7 @@ describe 'Usuário visita tela de categoria' do
     expect(page).to have_content 'Categoria cadastrada com sucesso.'
   end
 
-  it 'com dados incompletos' do
+  it 'e administrador tenta fazer cadastro dados incompletos' do
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
 
     #Act

@@ -1,5 +1,5 @@
 <div class="container shadow p-2 mb-4 bg-body-tertiary rounded div-max-width">
-  <h5 class="text-center">Categorias</h5>
+  <h5 class="text-center">Cadastrar Categorias</h5>
 </div>
 
 <div class="container text-center text-danger div-max-width">
@@ -27,7 +27,7 @@
       <tbody class="table-group-divider">
         <% @categories.each do |category| %>
           <tr>
-            <td><%= category.name %></td>
+            <td><%= link_to category.name, edit_category_path(category), class: "link-secondary" %></td>
           </tr>
         <% end %>
       </tbody>
