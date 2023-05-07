@@ -3,13 +3,13 @@
 </div>
 
 <div class="container text-center text-danger div-max-width">
-<% if @category.errors.any? %>
-  <dl>
-    <% @category.errors.full_messages.each do |msg| %>
-      <dt><%= msg %></dt>
-    <% end %>
-  </dl>
-<% end %>
+  <% if @category.errors.any? %>
+    <dl>
+      <% @category.errors.full_messages.each do |msg| %>
+        <dt><%= msg %></dt>
+      <% end %>
+    </dl>
+  <% end %>
 </div>
 
 <div class="container div-max-width">

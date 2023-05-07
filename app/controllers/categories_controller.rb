@@ -1,5 +1,5 @@
 class CategoriesController< ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!
   before_action :set_category, only: [:edit, :update]
   before_action :check_user
 
@@ -27,7 +27,7 @@ class CategoriesController< ApplicationController
     if @category.update(category_params)
       redirect_to categories_path, notice: 'Categoria alterada com sucesso.'
     else
-      flash.now[:notice] = 'Não foi possível alterar a categoria.'
+      flash.now[:alert] = 'Não foi possível alterar a categoria.'
       render :index
     end
   end

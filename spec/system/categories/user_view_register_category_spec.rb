@@ -11,6 +11,8 @@ describe 'Usuário visita tela de categoria' do
     visit categories_path
 
     # Assert
+    expect(current_path).to eq root_path
+    expect(page).not_to have_content 'Cadastrar Categorias'
     expect(page).not_to have_field('Nome')
     expect(page).to have_content 'Você não possui acesso a este módulo.'
   end

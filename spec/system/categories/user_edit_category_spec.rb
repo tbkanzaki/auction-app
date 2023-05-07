@@ -9,9 +9,10 @@ describe 'Usuário edita uma categoria' do
     #Act
     login_as(user)
     visit root_path
-    visit ("/categories/#{category.id}/edit")
+    visit edit_category_path(category.id)
 
     # Assert
+    expect(current_path).to eq root_path
     expect(page).not_to have_field('Nome')
     expect(page).to have_content 'Você não possui acesso a este módulo.'
   end

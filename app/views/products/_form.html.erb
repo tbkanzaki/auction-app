@@ -1,0 +1,49 @@
+<div class="container text-center text-danger div-max-width">
+  <% if @product.errors.any? %>
+    <dl>
+      <% @product.errors.full_messages.each do |msg| %>
+        <dt><%= msg %></dt>
+      <% end %>
+    </dl>
+  <% end %>
+</div>
+
+<div class="container div-max-width">
+  <%= form_with(model: @product) do |f| %>
+    <div class="mb-3">
+    <%= f.label :product_image, class: 'form-label' %>
+    <%= f.file_field :product_image, class: 'form-control mb-2', type: 'file'%>
+  </div>
+    <div class="mb-3">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control mb-2'  %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control mb-2'  %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :weight %>
+      <%= f.number_field :weight, class: 'form-control mb-2'  %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :width %>
+      <%= f.number_field :width, class: 'form-control mb-2'  %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :height %>
+      <%= f.number_field :height , class: 'form-control mb-2' %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :depth %>
+      <%= f.number_field :depth, class: 'form-control mb-2'  %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :category_id %>
+      <%= f.collection_select(:category_id, Category.order(:name), :id, :name , { prompt: 'Selecione' }, { class: 'form-control mb-2'}) %>
+      </div>
+    <div class="mb-3">
+      <%= f.submit 'Enviar', class: 'btn btn-secondary  mt-2' %>
+    </div>
+  <% end %>
+</div>

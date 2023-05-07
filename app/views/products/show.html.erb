@@ -1,0 +1,36 @@
+<div class="card mx-auto p-2 mb-3 div-max-width">
+  <div class="row g-0">
+    <div class="col-md-4 d-flex align-items-centerborder border-secondary">
+      <% if @product.product_image.attached? %>
+        <%= image_tag(@product.product_image, style: 'width:100%', class: 'img-fluid rounded-start img-thumbnail') %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3 class="card-title"><%= @product.code %> - <%= @product.name %></h3>
+        <dl class="row text-muted">
+          <dt class="col-sm-6">Peso</dt>
+          <dd class="col-sm-6"><%= @product.weight %></dd>
+
+          <dt class="col-sm-6">Dimensão (AxLxP)</dt>
+          <dd class="col-sm-6"><%= @product.height %> x <%= @product.width %> x <%= @product.depth %></dd>
+
+          <dt class="col-sm-6">Categoria</dt>
+          <dd class="col-sm-6"><%= @product.category.name %></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col centerborder border-secondary">
+      <dl class="row text-muted">        
+        <dd class="col-sm-12 ms-auto me-auto p-3 text-center" ><%= @product.description %></dd>
+        <div class="d-flex justify-content-center">
+        <div class="container div-max-width p-2">
+          <%= link_to 'Editar', edit_product_path, class: 'btn btn-secondary' %>
+          <%= link_to 'Voltar', :back, class: 'btn btn-secondary me-2' %>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
