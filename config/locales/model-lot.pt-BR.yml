@@ -1,0 +1,18 @@
+pt-BR:
+  waiting_approval: "Aguardando aprovação"
+  approved: "Aprovado"
+  closed: "Fechado"
+  cancelled: "Cancelado"
+  closed: "Fechado"
+  activerecord:
+    models:
+      lot: Lote
+    attributes:
+      lot:
+        code: "Código"
+        start_date: "Data inicial"
+        limit_date: "Data limite"
+        minimum_bid: "Lance mínimo"
+        minimum_difference_bids: "Diferença mínima entre lances"
+        status: "Status"
+        user_id: "Cadastrado por"

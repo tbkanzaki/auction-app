@@ -6,7 +6,7 @@ describe 'Usuário edita um produto' do
     user = User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
     
     category = Category.create!(name: 'Celular')
-
+    
     allow(SecureRandom).to receive(:alphanumeric).with(10).and_return('MOTOROI5XL')
     product = Product.create!(name: 'Celular MotG42',  description: 'Smartphone Motorola Moto G42 Azul',
                     weight: 800, width: 10, height: 15, depth: 5, category: category)
@@ -24,9 +24,9 @@ describe 'Usuário edita um produto' do
   it 'a partir da tela de detalhes como administrador' do
     #Arrange
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
-
+    
     category = Category.create!(name: 'Celular')
-
+    
     allow(SecureRandom).to receive(:alphanumeric).with(10).and_return('MOTOROI5XL')
     Product.create!(name: 'Celular MotG42',  description: 'Smartphone Motorola Moto G42 Azul',
                     weight: 800, width: 10, height: 15, depth: 5, category: category) 
@@ -46,13 +46,13 @@ describe 'Usuário edita um produto' do
     expect(page).to have_field 'Largura', with: 10
     expect(page).to have_field 'Altura', with: 15
     expect(page).to have_field 'Profundidade', with: 5
-    expect(page).to have_button 'Enviar'
+    expect(page).to have_button 'Salvar'
   end
 
   it 'com sucesso' do
     #Arrange
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
-
+    
     category = Category.create!(name: 'Celular')
 
     allow(SecureRandom).to receive(:alphanumeric).with(10).and_return('MOTOROI5XL')
@@ -71,7 +71,7 @@ describe 'Usuário edita um produto' do
     fill_in 'Altura', with: 600
     fill_in 'Largura', with: 900
     fill_in 'Profundidade', with: 10
-    click_on 'Enviar'
+    click_on 'Salvar'
 
     #Assert
     expect(page).to have_css('img[src*="celular_mot_azul.jpg"]')

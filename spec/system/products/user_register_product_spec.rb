@@ -21,9 +21,8 @@ describe 'Usuário cadastra produto' do
   it 'a partir da tela inicial como administrador' do
     #Arrange
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
-
     Category.create!(name: 'Celular')
-
+    
     allow(SecureRandom).to receive(:alphanumeric).with(10).and_return('MOTOROI5XL')
 
     #Act
@@ -39,7 +38,7 @@ describe 'Usuário cadastra produto' do
     fill_in 'Largura', with: 900
     fill_in 'Profundidade', with: 10
     select 'Celular', from: 'Categoria'
-    click_on 'Enviar'
+    click_on 'Salvar'
 
     #Assert
     expect(page).to have_css('img[src*="Celular.jpg"]')
@@ -50,10 +49,10 @@ describe 'Usuário cadastra produto' do
   end
 
   it 'com dados incompletos' do
+    #Arrange
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
-
     Category.create!(name: 'Celular')
-
+    
     allow(SecureRandom).to receive(:alphanumeric).with(10).and_return('MOTOROI5XL')
 
     #Act
@@ -64,7 +63,7 @@ describe 'Usuário cadastra produto' do
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
     select 'Selecione', from: 'Categoria'
-    click_on 'Enviar'
+    click_on 'Salvar'
 
     #Assert
     expect(page).not_to have_content 'MOTOROI5XL'

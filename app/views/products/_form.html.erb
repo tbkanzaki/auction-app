@@ -43,7 +43,7 @@
       <%= f.collection_select(:category_id, Category.order(:name), :id, :name , { prompt: 'Selecione' }, { class: 'form-control mb-2'}) %>
       </div>
     <div class="mb-3">
-      <%= f.submit 'Enviar', class: 'btn btn-secondary  mt-2' %>
+      <%= f.submit 'Salvar', class: 'btn btn-secondary  mt-2' %>
     </div>
   <% end %>
 </div>

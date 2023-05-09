@@ -10,7 +10,7 @@ describe 'Usuário visita página de produtos' do
     visit root_path
     visit products_path
 
-    # Assert
+    #Assert
     expect(current_path).to eq root_path
     expect(page).not_to have_content 'Produtos'
     expect(page).to have_content 'Você não possui acesso a este módulo.'
@@ -25,7 +25,7 @@ describe 'Usuário visita página de produtos' do
     visit root_path
     click_on 'Produtos'
 
-    # Assert
+    #Assert
     expect(page).to have_content 'Produtos'
     expect(current_path).to eq products_path
   end
@@ -38,11 +38,11 @@ describe 'Usuário visita página de produtos' do
     category_b = Category.create!(name: 'Celular')
 
     allow(SecureRandom).to receive(:alphanumeric).with(10).and_return('SAMSULP6FA')
-    product_a = Product.create!(name: 'TV 32', description: 'TV 32 SAMSUNG', 
+    Product.create!(name: 'TV 32', description: 'TV 32 SAMSUNG', 
                                 weight: 10000, width: 600, height: 900, depth: 10, category: category_a)   
     
     allow(SecureRandom).to receive(:alphanumeric).with(10).and_return('MOTORLP6FA')
-    product_a = Product.create!(name: 'Celular MotG42',  description: 'Smartphone Motorola Moto G42 Azul',
+    Product.create!(name: 'Celular MotG42',  description: 'Smartphone Motorola Moto G42 Azul',
                                 weight: 800, width: 10, height: 15, depth: 5, category: category_b) 
     
     
