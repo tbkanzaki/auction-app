@@ -23,25 +23,25 @@
       <%= f.text_area :description, class: 'form-control mb-2'  %>
     </div>
     <div class="mb-3">
-      <%= f.label :weight %>
+      <%= f.label :weight %> (g)
       <%= f.number_field :weight, class: 'form-control mb-2'  %>
     </div>
     <div class="mb-3">
-      <%= f.label :width %>
+      <%= f.label :width %> (cm)
       <%= f.number_field :width, class: 'form-control mb-2'  %>
     </div>
     <div class="mb-3">
-      <%= f.label :height %>
+      <%= f.label :height %> (cm)
       <%= f.number_field :height , class: 'form-control mb-2' %>
     </div>
     <div class="mb-3">
-      <%= f.label :depth %>
+      <%= f.label :depth %> (cm)
       <%= f.number_field :depth, class: 'form-control mb-2'  %>
     </div>
     <div class="mb-3">
       <%= f.label :category_id %>
       <%= f.collection_select(:category_id, Category.order(:name), :id, :name , { prompt: 'Selecione' }, { class: 'form-control mb-2'}) %>
-      </div>
+    </div>
     <div class="mb-3">
       <%= f.submit 'Salvar', class: 'btn btn-secondary  mt-2' %>
     </div>

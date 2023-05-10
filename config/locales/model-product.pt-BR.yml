@@ -4,6 +4,7 @@ pt-BR:
       product: Produto
     attributes:
       product:
+        code: "Código"
         name: "Nome"
         description: "Descrição"
         weight: "Peso"

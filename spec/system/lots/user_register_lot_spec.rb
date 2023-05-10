@@ -33,7 +33,7 @@ describe 'Usuário cadastra lotes' do
 
     #Assert
     expect(page).to have_content 'Lote cadastrado com sucesso.'
-    expect(page).to have_content 'Código YYY123456'
+    expect(page).to have_content 'Lote YYY123456'
 
     formatted_date1 = I18n.localize(1.week.from_now.to_date)
     expect(page).to have_content "Data inicial #{formatted_date1}"

@@ -10,10 +10,10 @@
       <div class="container shadow p-2 mb-3 bg-body-tertiary rounded div-max-width">
         <h5 class="text-center">Lotes</h5>
       </div>
-      <div class="container shadow bg-body-tertiary rounded div-max-width">
+      <div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
         <h5 class="text-center">Aprovados - em andamento</h5>
       </div>
-      <div class="container div-max-width" >
+      <div class="container div-max-width  mb-4">
         <% if @approved_in_progress_lots.any? %>
           <table class="table table-striped table-hover">
             <thead>
@@ -36,14 +36,14 @@
             </tbody>
           </table>
         <% else %>
-          <p>Não existem lotes no momento.</p>
+          <p class="text-center">Não existem lotes no momento.</p>
         <% end %>
       </div>
 
-      <div class="container shadow bg-body-tertiary rounded div-max-width">
+      <div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
         <h5 class="text-center">Aprovados - futuros</h5>
       </div>
-      <div class="container div-max-width" >
+      <div class="container div-max-width mb-4">
         <% if @approved_future_lots.any? %>
           <table class="table table-striped table-hover">
             <thead>
@@ -66,7 +66,7 @@
             </tbody>
           </table>
         <% else %>
-          <p>Não existem lotes no momento.</p>
+          <p class="text-center">Não existem lotes no momento.</p>
         <% end %>
       </div>
     </div>

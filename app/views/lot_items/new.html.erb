@@ -1,0 +1,15 @@
+<div class="container shadow p-2 mb-4 bg-body-tertiary rounded div-max-width">
+  <h5 class="text-center">Novo Item do Lote <%= @lot.code%></h5>
+</div>
+
+<div class="container div-max-width">
+  <%= form_with(model: [@lot, @lot_item]) do |f| %>
+    <div class="mb-3">
+      <%= f.label :product_id %>
+      <%= f.collection_select(:product_id, @products, :id, :name , { prompt: 'Selecione' }, { class: 'form-control mb-2'}) %>
+      </div>
+    <div class="mb-3">
+      <%= f.submit 'Salvar', class: 'btn btn-secondary btn-sm mt-2' %>
+    </div>
+  <% end %>
+</div>
