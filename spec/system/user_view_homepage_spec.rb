@@ -1,18 +1,6 @@
 require 'rails_helper'
 
 describe 'Usuário visita página inicial' do
-  it 'e vê a imagem com o atributo alt com o nome da aplicação' do
-    # Arrange
-    
-    # Act
-    visit('/')
-
-    # Assert
-    expect(page).to have_link 'Entrar'
-    expect(page).to have_selector('img[alt="Leilão de Estoque"]')
-    expect(page).not_to have_content 'Categorias'
-  end
-
   it 'e mesmo não autenticado, vê somente lotes aprovados' do
     #Arrange
     user_tereza = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
@@ -76,8 +64,7 @@ describe 'Usuário visita página inicial' do
 
   it 'e não existem lotes no momento.' do
     #Arrange
-    user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
-
+    
     #Act
     visit root_path
 

@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :new, :create, :show, :edit, :update] 
 
   resources :lots, only: [:index, :new, :create, :show] do
-    resources :lot_items, only: [:new, :create, :destroy] do
-    end
+    post :approved, on: :member
+    post :closed, on: :member
+    post :cancelled, on: :member
+    resources :lot_items, on: :member, only: [:new, :create, :destroy]
   end
-
 end

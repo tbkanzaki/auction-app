@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :lot_approvers
+  has_many :lot, through: :lot_approvers
  
   validates :name, :cpf, presence: true
   validates :cpf, uniqueness: true

@@ -1,7 +1,8 @@
 class LotsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_user
-  before_action :set_lot, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:index, :new, :create, :approved]
+
+  before_action :check_user, only: [:index, :new, :create, :approved]
+  before_action :set_lot, only: [:show, :approved]
 
   def index
     @lots = Lot.order(:start_date, :limit_date)
@@ -23,6 +24,22 @@ class LotsController < ApplicationController
     else
       flash.now[:alert] = 'Não foi possível cadastrar o lote.'
       render :new
+    end
+  end
+
+  def show
+    if @lot.approved?
+      @lot_approver = LotApprover.where(lot_id: @lot).first
+    end
+  end
+
+  def approved
+    @lot_approver = LotApprover.new(lot: @lot, user: current_user)
+    if @lot_approver.save
+      @lot.approved! 
+      redirect_to @lot, notice: 'Staus do Lote aprovado com sucesso.'
+    else
+      redirect_to @lot, alert: 'Staus do Lote aprovado com sucesso.'
     end
   end
 

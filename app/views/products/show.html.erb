@@ -1,4 +1,4 @@
-<div class="card mx-auto p-2 mb-3 div-max-width">
+<div class="card mx-auto p-2 mb-3">
   <div class="row g-0">
     <div class="col-md-4 d-flex align-items-centerborder border-secondary">
       <% if @product.product_image.attached? %>
@@ -11,26 +11,19 @@
         <dl class="row text-muted">
           <dt class="col-sm-6">Peso</dt>
           <dd class="col-sm-6"><%= @product.weight %></dd>
-
           <dt class="col-sm-6">Dimensão (AxLxP)</dt>
           <dd class="col-sm-6"><%= @product.height %> x <%= @product.width %> x <%= @product.depth %></dd>
-
           <dt class="col-sm-6">Categoria</dt>
           <dd class="col-sm-6"><%= @product.category.name %></dd>
+          <dd class="col-sm-12"><%= @product.description %></dd>
         </dl>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col centerborder border-secondary">
-      <dl class="row text-muted">        
-        <dd class="col-sm-12 ms-auto me-auto p-3 text-center" ><%= @product.description %></dd>
-        <div class="d-flex justify-content-center">
-        <div class="container div-max-width p-2">
-          <%= link_to 'Editar', edit_product_path, class: 'btn btn-secondary' %>
-          <%= link_to 'Voltar', :back, class: 'btn btn-secondary me-2' %>
-        </div>
-      </dl>
-    </div>
+  <div class="container mt-2">
+    <% if user_signed_in? && current_user.admin? %>
+      <%= link_to 'Editar', edit_product_path, class: 'btn btn-secondary' %>
+    <% end %>
+    <%= link_to 'Voltar', :back, class: 'btn btn-secondary me-2' %>
   </div>
 </div>

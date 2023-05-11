@@ -3,6 +3,9 @@ class Lot < ApplicationRecord
   has_many :lot_items
   has_many :products, through: :lot_items
 
+  has_many :lot_approvers
+  has_many :users, through: :lot_approvers
+
   validates :code, :start_date, :limit_date, :minimum_bid, :minimum_difference_bids, presence: true
   validates :code, uniqueness: true
   validates :code, format: { with: /\A[A-Za-z]{3}\d{6}\z/, message: ' deve ser composto por 3 letras e 6 caracteres.' }

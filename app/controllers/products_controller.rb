@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index, :new, :create, :edit, :update]
   before_action :set_product, only: [:show, :edit, :update]
-  before_action :check_user
+  before_action :check_user, only: [:index, :new, :create, :edit, :update]
 
   def index
     @products = Product.joins(:category).order("categories.name, products.name")
