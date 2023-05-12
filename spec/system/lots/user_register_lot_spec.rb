@@ -34,14 +34,11 @@ describe 'Usuário cadastra lotes' do
     #Assert
     expect(page).to have_content 'Lote cadastrado com sucesso.'
     expect(page).to have_content 'Lote YYY123456'
-
     formatted_date1 = I18n.localize(1.week.from_now.to_date)
     expect(page).to have_content "Data inicial #{formatted_date1}"
-
     formatted_date2 = I18n.localize(1.month.from_now.to_date)
     expect(page).to have_content "Data limite #{formatted_date2}"
-
-    expect(page).to have_content 'Lance mínimo 100'
+    expect(page).to have_content 'Lance inicial 100'
     expect(page).to have_content 'Diferença mínima entre lances 5'
   end
 

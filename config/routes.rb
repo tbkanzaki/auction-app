@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     post :closed, on: :member
     post :cancelled, on: :member
     resources :lot_items, on: :member, only: [:new, :create, :destroy]
+    resources :lot_bids, on: :member, only: [:new, :create]
   end
 end

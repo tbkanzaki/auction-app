@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   has_many :lot_approvers
   has_many :lot, through: :lot_approvers
+
+  has_many :lot_bids
+  has_many :lot, through: :lot_bids
  
   validates :name, :cpf, presence: true
   validates :cpf, uniqueness: true

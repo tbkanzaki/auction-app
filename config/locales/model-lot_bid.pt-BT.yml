@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      lot_bid: Lance do Lote
+    attributes:
+      lot_bid:
+        lot_id: "Lote"
+        lot: "Lote"
+        bid_id: "Lance"
+        bid: "Lance"

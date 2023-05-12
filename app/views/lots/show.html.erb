@@ -7,11 +7,17 @@
         <dd class="col-sm-6"><%= I18n.localize(@lot.start_date) %></dd>
         <dt class="col-sm-6">Data limite</dt>
         <dd class="col-sm-6"><%= I18n.localize(@lot.limit_date) %></dd>
-        <dt class="col-sm-6">Lance mínimo</dt>
+        <dt class="col-sm-6">Lance inicial</dt>
         <dd class="col-sm-6"><%= @lot.minimum_bid %></dd>
         <dt class="col-sm-6">Diferença mínima entre lances</dt>
         <dd class="col-sm-6"><%= @lot.minimum_difference_bids %></dd>
-        
+        <% if @bid_max.present? %>
+          <hr>
+          <dt class="col-sm-6">Último lance registrado</dt>
+          <dd class="col-sm-6"><%= @bid_max %></dd>
+          <dt class="col-sm-6">Lance mínimo atual</dt>
+          <dd class="col-sm-6"><%= @bid_max + @lot.minimum_difference_bids %></dd>
+        <% end %>
         <% if user_signed_in? && current_user.admin? %>
           <dt class="col-sm-6">Cadastrado por</dt>
           <dd class="col-sm-6"><%= @lot.user.name %></dd>
@@ -36,6 +42,12 @@
               </div>
             <% end %>
           <% end %>
+        <% else %>
+          <div class="container">
+            <% if user_signed_in? && !current_user.admin? && Date.today.between?(@lot.start_date, @lot.limit_date)  %>
+              <%= link_to 'Dar lance', new_lot_lot_bid_path(@lot.id), class: 'btn btn-secondary btn-sm' %>
+            <% end %>
+          </div>
         <% end %>
       </dl>
     </div>

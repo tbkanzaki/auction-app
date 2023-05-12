@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     models:
-      lot_item: Itens do Lote
+      lot_item: Item do Lote
     attributes:
       lot_item:
         lot_id: "Lote"

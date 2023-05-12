@@ -35,7 +35,7 @@ describe 'Usuário vê detalhes do lote' do
     expect(page).to have_content "Data inicial #{formatted_date1}"
     formatted_date2 = I18n.localize(1.month.from_now.to_date)
     expect(page).to have_content "Data limite #{formatted_date2}"
-    expect(page).to have_content 'Lance mínimo 100'
+    expect(page).to have_content 'Lance inicial 100'
     expect(page).to have_content 'Diferença mínima entre lances 5'
     expect(page).not_to have_content 'Cadastrado por'
     expect(page).not_to have_content 'Aprovado por'
@@ -53,19 +53,15 @@ describe 'Usuário vê detalhes do lote' do
         #Act
     login_as(user)
     visit root_path
-    click_on 'Controle de Lotes'
     click_on 'ABC123456'
 
     #Assert
     expect(page).to have_content 'Lote ABC123456'
-
     formatted_date1 = I18n.localize(1.week.from_now.to_date)
     expect(page).to have_content "Data inicial #{formatted_date1}"
-
     formatted_date2 = I18n.localize(1.month.from_now.to_date)
     expect(page).to have_content "Data limite #{formatted_date2}"
-
-    expect(page).to have_content 'Lance mínimo 100'
+    expect(page).to have_content 'Lance inicial 100'
     expect(page).to have_content 'Diferença mínima entre lances 5'
   end 
 
@@ -99,7 +95,6 @@ describe 'Usuário vê detalhes do lote' do
     #Act
     login_as(user)
     visit root_path
-    click_on 'Controle de Lotes'
     click_on 'ABC123456'
 
     #Assert
@@ -137,7 +132,6 @@ describe 'Usuário vê detalhes do lote' do
     #Act
     login_as(user_cristina)
     visit root_path
-    click_on 'Controle de Lotes'
     click_on 'ABC123456'
     click_on 'Aprovar lote'
 

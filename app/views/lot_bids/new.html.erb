@@ -1,0 +1,17 @@
+<div class="container shadow p-2 mb-4 bg-body-tertiary rounded div-max-width">
+  <h5 class="text-center">Lance para o lote <%= @lot.code%></h5>
+</div>
+
+<div class="container div-max-width">
+  <%= form_with(model: [@lot, @lot_bid]) do |f| %>
+    <div class="mb-3">
+      <%= f.label :bid %>
+      <%= f.number_field :bid, class: 'form-control mb-2'  %>
+      </div>
+    <div class="mb-3">
+      <%= f.submit 'Salvar', class: 'btn btn-secondary btn-sm mt-2' %>
+      <%= link_to 'Voltar', :back, class: 'btn btn-secondary  btn-sm mt-2 ms-2' %>
+    </div>
+  <% end %>
+</div>
+  

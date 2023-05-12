@@ -28,18 +28,20 @@ class LotsController < ApplicationController
   end
 
   def show
+    @lot_bid = Lot.new
     if @lot.approved?
       @lot_approver = LotApprover.where(lot_id: @lot).first
     end
+    @bid_max = LotBid.where(lot_id: @lot).maximum(:bid)
   end
 
   def approved
     @lot_approver = LotApprover.new(lot: @lot, user: current_user)
     if @lot_approver.save
       @lot.approved! 
-      redirect_to @lot, notice: 'Staus do Lote aprovado com sucesso.'
+      redirect_to @lot, notice: 'Status do Lote aprovado com sucesso.'
     else
-      redirect_to @lot, alert: 'Staus do Lote aprovado com sucesso.'
+      redirect_to @lot, alert: 'Status do Lote aprovado com sucesso.'
     end
   end
 
