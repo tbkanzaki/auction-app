@@ -35,8 +35,8 @@ describe 'Usuário vê detalhes do lote' do
     expect(page).to have_content "Data inicial #{formatted_date1}"
     formatted_date2 = I18n.localize(1.month.from_now.to_date)
     expect(page).to have_content "Data limite #{formatted_date2}"
-    expect(page).to have_content 'Lance inicial 100'
-    expect(page).to have_content 'Diferença mínima entre lances 5'
+    expect(page).to have_content 'Lance mínimo inicial R$ 100,00'
+    expect(page).to have_content 'Diferença mínima entre lances R$ 5,00'
     expect(page).not_to have_content 'Cadastrado por'
     expect(page).not_to have_content 'Aprovado por'
     expect(page).to have_content 'TV-01 SAMSUNG32'
@@ -61,8 +61,8 @@ describe 'Usuário vê detalhes do lote' do
     expect(page).to have_content "Data inicial #{formatted_date1}"
     formatted_date2 = I18n.localize(1.month.from_now.to_date)
     expect(page).to have_content "Data limite #{formatted_date2}"
-    expect(page).to have_content 'Lance inicial 100'
-    expect(page).to have_content 'Diferença mínima entre lances 5'
+    expect(page).to have_content 'Lance mínimo inicial R$ 100,00'
+    expect(page).to have_content 'Diferença mínima entre lances R$ 5,00'
   end 
 
   it 'e vê itens do lote, como administrador' do

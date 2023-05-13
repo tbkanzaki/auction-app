@@ -2,7 +2,7 @@ user_tereza = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.c
 user_cristina = User.create!(name: 'Cristina Souza', email:'cristina@leilaodogalpao.com.br', password:'senha1234', cpf: '97458446919')
 user_beth = User.create!(name: 'Beth Ribeiro', email:'beth@leilaodogalpao.com.br', password:'senha1234', cpf: '02454873443')
 User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
-
+User.create!(name: 'Joana Sousa', email:'joana@provedor.com', password:'senha1234', cpf: '85236832241')
 Category.create!(name: 'Eletro/Eletrônico')
 Category.create!(name: 'Informática e acessórios')
 category_a = Category.create!(name: 'TV')

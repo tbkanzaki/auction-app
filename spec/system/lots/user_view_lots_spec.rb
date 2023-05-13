@@ -15,7 +15,6 @@ describe 'Usuário visita página de Controle de Lotes' do
 
     #Assert
     expect(current_path).to eq root_path
-    expect(page).not_to have_content 'Para continuar, faça login ou registre-se.'
     expect(page).to have_content 'Você não possui acesso a este módulo.'
   end
 

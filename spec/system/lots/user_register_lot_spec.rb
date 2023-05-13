@@ -27,7 +27,7 @@ describe 'Usuário cadastra lotes' do
     fill_in 'Código', with: 'YYY123456'
     fill_in 'Data inicial', with: 1.week.from_now.to_date
     fill_in 'Data limite',  with: 1.month.from_now.to_date
-    fill_in 'Lance mínimo', with: 100
+    fill_in 'Lance mínimo inicial', with: 100
     fill_in 'Diferença mínima entre lances', with: 5
     click_on 'Salvar'
 
@@ -38,8 +38,8 @@ describe 'Usuário cadastra lotes' do
     expect(page).to have_content "Data inicial #{formatted_date1}"
     formatted_date2 = I18n.localize(1.month.from_now.to_date)
     expect(page).to have_content "Data limite #{formatted_date2}"
-    expect(page).to have_content 'Lance inicial 100'
-    expect(page).to have_content 'Diferença mínima entre lances 5'
+    expect(page).to have_content 'Lance mínimo inicial R$ 100,00'
+    expect(page).to have_content 'Diferença mínima entre lances R$ 5,00'
   end
 
   it 'com dados incompletos, como administrador' do
@@ -54,7 +54,7 @@ describe 'Usuário cadastra lotes' do
     fill_in 'Código', with: ''
     fill_in 'Data inicial', with: ''  
     fill_in 'Data limite', with: ''
-    fill_in 'Lance mínimo', with: ''
+    fill_in 'Lance mínimo inicial', with: ''
     fill_in 'Diferença mínima entre lances', with: ''
     click_on 'Salvar'
 
@@ -63,7 +63,7 @@ describe 'Usuário cadastra lotes' do
     expect(page).to have_content 'Código não pode ficar em branco'
     expect(page).to have_content 'Data inicial não pode ficar em branco'
     expect(page).to have_content 'Data limite não pode ficar em branco'
-    expect(page).to have_content 'Lance mínimo não pode ficar em branco'
+    expect(page).to have_content 'Lance mínimo inicial não pode ficar em branco'
     expect(page).to have_content 'Diferença mínima entre lances não pode ficar em branco'
   end
 
@@ -77,7 +77,7 @@ describe 'Usuário cadastra lotes' do
     click_on 'Controle de Lotes'
     click_on 'Novo Lote'
     fill_in 'Código', with: 'YYY123456'
-    fill_in 'Data inicial', with: 1.day.ago.to_date
+    fill_in 'Data inicial', with: 2.days.ago.to_date
     fill_in 'Data limite',  with: 1.month.from_now.to_date
     fill_in 'Lance mínimo', with: 100
     fill_in 'Diferença mínima entre lances', with: 5

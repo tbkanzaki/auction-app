@@ -1,14 +1,16 @@
 class LotsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :new, :create, :approved]
+  before_action :authenticate_user!, only: [:index, :new, :create, :approved, :closed , :cancelled]
 
-  before_action :check_user, only: [:index, :new, :create, :approved]
-  before_action :set_lot, only: [:show, :approved]
+  before_action :check_user, only: [:index, :new, :create, :approved, :closed , :cancelled]
+  before_action :set_lot, only: [:show, :approved, :closed , :cancelled ]
 
   def index
     @lots = Lot.order(:start_date, :limit_date)
     @waiting_approval_lots = Lot.waiting_approval.order(:start_date, :limit_date)
     @approved_in_progress_lots = Lot.approved.where("start_date <= ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
     @approved_future_lots = Lot.approved.where("start_date > ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
+    @approved_expired_lots = Lot.approved.where("limit_date < ?", Date.today).order(:start_date, :limit_date)
+    @cancelled_lots = Lot.cancelled.order(:start_date, :limit_date)
   end
 
   def new
@@ -39,10 +41,28 @@ class LotsController < ApplicationController
     @lot_approver = LotApprover.new(lot: @lot, user: current_user)
     if @lot_approver.save
       @lot.approved! 
-      redirect_to @lot, notice: 'Status do Lote aprovado com sucesso.'
+      redirect_to @lot, notice: 'Lote aprovado com sucesso.'
     else
-      redirect_to @lot, alert: 'Status do Lote aprovado com sucesso.'
+      redirect_to @lot, alert: 'Não foi possível aprovar o lote.'
     end
+  end
+  
+  def closed
+    @lot.closed! 
+    @lot.lot_items.each do |item|
+      product = Product.find(item.product.id)
+      product.sold!
+    end
+    redirect_to @lot, notice: 'Lote encerrado com sucesso.'
+  end
+
+  def cancelled
+    @lot.cancelled! 
+    @lot.lot_items.each do |item|
+      product = Product.find(item.product.id)
+      product.unblocked!
+    end
+    redirect_to @lot, notice: 'Lote cancelado com sucesso.'
   end
 
   private
@@ -60,4 +80,5 @@ class LotsController < ApplicationController
   def lot_params
     params.require(:lot).permit(:code, :start_date, :limit_date, :minimum_bid, :minimum_difference_bids)
   end
+  
 end
