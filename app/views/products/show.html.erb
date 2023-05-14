@@ -1,4 +1,4 @@
-<div class="card mx-auto p-2 mb-3">
+<div class="card mx-auto p-2 mb-3 mt-3 div-max-width">
   <div class="row g-0">
     <div class="col-md-4 d-flex align-items-centerborder border-secondary">
       <% if @product.product_image.attached? %>
@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h3 class="card-title"><%= @product.code %> - <%= @product.name %></h3>
+        <h3 class="card-title">Produto <%= @product.code %> - <%= @product.name %></h3>
         <dl class="row text-muted">
           <dt class="col-sm-6">Peso</dt>
           <dd class="col-sm-6"><%= @product.weight %></dd>

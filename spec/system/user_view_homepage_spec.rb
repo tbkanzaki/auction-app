@@ -6,23 +6,22 @@ describe 'Usuário visita página inicial' do
     user_tereza = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
 
     Lot.create!(code:'TAB000003', start_date: 1.day.from_now , limit_date: 1.month.from_now, 
-              minimum_bid: 100, minimum_difference_bids: 5, status: 'waiting_approval', user: user_tereza )
+              minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
 
-    Lot.create!(code:'TAB000005', start_date: 1.day.from_now , limit_date: 2.months.from_now, 
-                minimum_bid: 100, minimum_difference_bids: 5, status: 'approved', user: user_tereza )
+    lot_1 = Lot.create!(code:'TAB000005', start_date: 1.day.from_now , limit_date: 2.months.from_now, 
+                minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
 
-    Lot.create!(code:'TAB000008', start_date: 2.weeks.from_now , limit_date: 2.months.from_now, 
-                minimum_bid: 100, minimum_difference_bids: 5, status: 'approved', user: user_tereza )
-    
-    Lot.create!(code:'TAB000001', start_date: 1.week.from_now , limit_date: 3.weeks.from_now, 
-                minimum_bid: 100, minimum_difference_bids: 5, status: 'cancelled', user: user_tereza )
+    lot_2 = Lot.create!(code:'TAB000001', start_date: 1.week.from_now , limit_date: 3.weeks.from_now, 
+                minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
   
+    lot_1.approved!
+    lot_2.cancelled!
     #Act
     visit root_path
  
     #Assert
-    expect(page).to have_content 'Aprovados - em andamento'
-    expect(page).to have_content 'Aprovados - futuros'
+    expect(page).to have_content 'Em andamento'
+    expect(page).to have_content 'Futuros'
     expect(page).to have_content 'Código'
     expect(page).to have_content 'Data inicial'
     expect(page).to have_content 'Data limite'
@@ -32,7 +31,6 @@ describe 'Usuário visita página inicial' do
     expect(page).to have_content "#{formatted_date1}"
     formatted_date2 = I18n.localize(2.months.from_now.to_date)
     expect(page).to have_content "#{formatted_date2}"
-    expect(page).to have_content 'TAB000008'
 
     expect(page).not_to have_content 'TAB000001'
     expect(page).not_to have_content 'TAB000003'
@@ -54,15 +52,15 @@ describe 'Usuário visita página inicial' do
     visit root_path
  
     #Assert
-    expect(page).to have_content 'Aprovados - em andamento'
-    expect(page).to have_content 'Aprovados - futuros'
+    expect(page).to have_content 'Em andamento'
+    expect(page).to have_content 'Futuros'
     expect(page).not_to have_content 'TAB000001'
     expect(page).not_to have_content 'TAB000003'
     expect(page).not_to have_content 'TAB000009'
     expect(page).to have_content 'Não existem lotes no momento.'
   end
 
-  it 'e não visualiza lotes com lances, mas com data ultrapassada' do
+  it 'e não visualiza lotes Expirados' do
     #Arrange
     user_tereza = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
     user_cristina = User.create!(name: 'Cristina Souza', email:'cristina@leilaodogalpao.com.br', password:'senha1234', cpf: '97458446919')
@@ -107,8 +105,8 @@ describe 'Usuário visita página inicial' do
     visit root_path
 
     #Assert
-    expect(page).to have_content 'Aprovados - em andamento'
-    expect(page).to have_content 'Aprovados - futuros'
+    expect(page).to have_content 'Em andamento'
+    expect(page).to have_content 'Futuros'
     expect(page).to have_content 'Não existem lotes no momento.'
   end
 end

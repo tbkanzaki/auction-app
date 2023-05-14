@@ -32,6 +32,11 @@
                   <%= link_to "Controle de Lotes", lots_path, class: "nav-link text-light" %>
                 </li>
               <% end %>
+              <% if user_signed_in? && !current_user.admin? %>
+                <li class="nav-item">
+                  <%= link_to "Meus Lotes", lot_bids_path, class: "nav-link text-light" %>
+                </li>
+              <% end %>
             </ul>
             <div class="ml-auto d-flex">
               <% if user_signed_in? %>
@@ -47,9 +52,9 @@
       </nav>
     </header>
     <main>
-      <div class="container div-max-width mt-4">
-        <div class="text-danger text-center"><%= alert %></div>
-        <div class="text-success text-center"><%= notice %></div>
+      <div class="container">
+        <div class="text-danger text-center div-max-width"><%= alert %></div>
+        <div class="text-success text-center div-max-width"><%= notice %></div>
         <%= yield %>
       </div>
     </main>

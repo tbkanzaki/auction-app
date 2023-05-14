@@ -22,9 +22,8 @@ describe 'Usuário visitante autenticado dá lance em um lote' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    
-    lot_item_1 = LotItem.create!(lot: lot, product: product_a)    
-    lot_item_2 = LotItem.create!(lot: lot, product: product_b)   
+    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_b)   
     lot.approved!
     lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot).update(start_date: 2.days.ago)
@@ -67,9 +66,8 @@ describe 'Usuário visitante autenticado dá lance em um lote' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    
-    lot_item_1 = LotItem.create!(lot: lot, product: product_a)    
-    lot_item_2 = LotItem.create!(lot: lot, product: product_b)   
+    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_b)   
     lot.approved!
     lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot).update(start_date: 2.days.ago)
@@ -109,9 +107,8 @@ describe 'Usuário visitante autenticado dá lance em um lote' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    
-    lot_item_1 = LotItem.create!(lot: lot, product: product_a)    
-    lot_item_2 = LotItem.create!(lot: lot, product: product_b)   
+    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_b)   
     lot.approved!
     lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot).update(start_date: 2.days.ago)

@@ -3,6 +3,10 @@ class LotBidsController < ApplicationController
   before_action :set_lot, only: [:new, :create, :check_bid ]
   before_action :check_bid, only: [:create]
 
+  def index
+    @lot_winner = LotBid.select('MAX(bid), lot_id, user_id, bid').group(:lot_id)
+  end
+
   def new
     @lot_bid = LotBid.new()
   end

@@ -1,4 +1,4 @@
-<div class="container shadow p-2 mb-4 bg-body-tertiary rounded div-max-width">
+<div class="container shadow p-2 mb-4 mt-3 bg-body-tertiary rounded div-max-width">
   <div class="card mx-auto mb-3 card-max-width">
     <div class="card-body">
       <h3 class="card-title text-center">Lote <%= @lot.code %></h3>
@@ -11,25 +11,29 @@
         <dd class="col-sm-6"><%= number_to_currency(@lot.minimum_bid) %></dd>
         <dt class="col-sm-6"><%= Lot.human_attribute_name(:minimum_difference_bids) %></dt>
         <dd class="col-sm-6"><%= number_to_currency(@lot.minimum_difference_bids) %></dd>
+        <dt class="col-sm-6">Cadastrado por</dt>
+        <dd class="col-sm-6"><%= @lot.user.name %></dd>
+        <dt class="col-sm-6">Status</dt>
+        <dd class="col-sm-6"><%= I18n.t(@lot.status) %></dd>
+        <% if @lot_approver.present?%>
+          <dt class="col-sm-6">Aprovado por</dt>
+          <dd class="col-sm-6"><%= @lot_approver.user.name %></dd>
+          <dt class="col-sm-6">Data da aprovação</dt>
+          <dd class="col-sm-6"><%= I18n.localize(@lot_approver.created_at.to_date) %></dd>
+        <% end %>
         <% if @bid_max.present? %>
           <hr>
           <dt class="col-sm-6">Último lance registrado</dt>
           <dt class="col-sm-6"><%= number_to_currency(@bid_max) %></dd>
-          <dt class="col-sm-6">Lance mínimo atual</dt>
-          <dt class="col-sm-6"><%= number_to_currency(@bid_max + @lot.minimum_difference_bids()) %></dd>
+          <% if @winner_user.present? %> 
+            <dt class="col-sm-6"> Vencedor do lote </dt>
+            <dt class="col-sm-6"><%= @winner_user.name %></dt>
+          <% else %>
+            <dt class="col-sm-6">Lance mínimo atual</dt>
+            <dt class="col-sm-6"><%= number_to_currency(@bid_max + @lot.minimum_difference_bids) %></dd>
+          <% end %>
         <% end %>
         <% if user_signed_in? && current_user.admin? %>
-          <dt class="col-sm-6">Cadastrado por</dt>
-          <dd class="col-sm-6"><%= @lot.user.name %></dd>
-          <dt class="col-sm-6">Status</dt>
-          <dd class="col-sm-6"><%= I18n.t(@lot.status) %></dd>
-          <% if @lot_approver.present?%>
-            <hr>
-            <dt class="col-sm-6">Aprovado por</dt>
-            <dd class="col-sm-6"><%= @lot_approver.user.name %></dd>
-            <dt class="col-sm-6">Data da aprovação</dt>
-            <dd class="col-sm-6"><%= I18n.localize(@lot_approver.created_at.to_date) %></dd>
-          <% end %>
           <% if @lot.waiting_approval? && @lot.start_date > Date.today.to_date %>
             <% if current_user != @lot.user && @lot.lot_items.present? %>
               <dt class="col-sm-6"> </dt>

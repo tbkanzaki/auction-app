@@ -21,10 +21,10 @@ describe 'Usuário vê detalhes do lote' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    lot_item_1 = LotItem.create!(lot: lot, product: product_a)    
-    lot_item_2 = LotItem.create!(lot: lot, product: product_b)   
+    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_b)   
     lot.approved!
-    lot_approver = LotApprover.create!(lot: lot, user_id: user_cristina.id) 
+    LotApprover.create!(lot: lot, user_id: user_cristina.id) 
 
     visit root_path
     click_on 'ABC123456'
@@ -37,22 +37,21 @@ describe 'Usuário vê detalhes do lote' do
     expect(page).to have_content "Data limite #{formatted_date2}"
     expect(page).to have_content 'Lance mínimo inicial R$ 100,00'
     expect(page).to have_content 'Diferença mínima entre lances R$ 5,00'
-    expect(page).not_to have_content 'Cadastrado por'
-    expect(page).not_to have_content 'Aprovado por'
     expect(page).to have_content 'TV-01 SAMSUNG32'
     expect(page).to have_content 'TV-02 SAMSUNG43'
   end
   
-  it 'a partir da tela inicial como administrador' do
+  it 'a partir da tela de Controle de Lotes como administrador' do
     #Arrange
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
 
     Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user )
     
-        #Act
+    #Act
     login_as(user)
     visit root_path
+    click_on 'Controle de Lotes'
     click_on 'ABC123456'
 
     #Assert
@@ -88,13 +87,14 @@ describe 'Usuário vê detalhes do lote' do
 
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user )
-    
+ 
     LotItem.create!(lot: lot, product: product_a)    
     LotItem.create!(lot: lot, product: product_b)    
 
     #Act
     login_as(user)
     visit root_path
+    click_on 'Controle de Lotes'
     click_on 'ABC123456'
 
     #Assert
@@ -103,7 +103,6 @@ describe 'Usuário vê detalhes do lote' do
     expect(page).to have_content 'TV01-32SAN - TV-01 SAMSUNG32'
     expect(page).to have_content 'TV02-43SAN - TV-02 SAMSUNG43'
     expect(page).not_to have_content 'TV03-50SAN - TV-03 SAMSUNG50'
-
   end
 
   it 'e aprova o lote com sucesso, como adminstrador' do
@@ -132,13 +131,13 @@ describe 'Usuário vê detalhes do lote' do
     #Act
     login_as(user_cristina)
     visit root_path
+    click_on 'Controle de Lotes'
     click_on 'ABC123456'
     click_on 'Aprovar lote'
 
     #Assert
     expect(LotApprover.count).to eq 1
     expect(LotApprover.where(lot: lot, user: user_cristina).count).to eq 1
-
     expect(page).to have_content 'Lote ABC123456'
     expect(page).to have_content 'Aprovado'
     expect(page).to have_content 'Itens do Lote'
@@ -165,10 +164,10 @@ describe 'Usuário vê detalhes do lote' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    lot_item_1 = LotItem.create!(lot: lot, product: product_a)    
-    lot_item_2 = LotItem.create!(lot: lot, product: product_b)   
+    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_b)   
     lot.approved!
-    lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
+    LotApprover.create!(lot: lot, user: user_cristina) 
 
     #Act
     login_as(user_cristina)

@@ -1,88 +1,89 @@
-<div class="container shadow p-2 mb-3 bg-body-tertiary rounded div-max-width">
-  <h5 class="text-center">Lotes</h5>
+<div class="container shadow p-2 mb-3 mt-2bg-body-tertiary rounded div-max-width">
+  <h3 class="text-center">Controle de Lotes</h3>
 </div>
-<hr>
-<% if current_user.admin?  %>
-  <div class="container div-max-width p-2 mb-3">
+
+<div class="container div-max-width p-2 mb-3">
   <%= link_to 'Novo Lote', new_lot_path, class: 'btn btn-secondary' %>
-  </div>
-  <hr>
-  <div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-    <h5 class="text-center">Aprovados - Expirados</h5>
-  </div>
-  <div class="container div-max-width mb-4">
-    <% if @approved_expired_lots.any? %>
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr class="text-center">
-            <th><%= Lot.human_attribute_name(:code) %></th>
-            <th><%= Lot.human_attribute_name(:start_date) %></th>
-            <th><%= Lot.human_attribute_name(:limit_date) %></th>
-            <th><%= Lot.human_attribute_name(:minimum_bid) %></th>
-            <th>Qtd lances</th>
-            <th>Ultimo lance</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <% @approved_expired_lots.each do |lot| %>
-            <% lot_bid_count =  lot.lot_bids.count %>
-            <tr class="text-center">
-              <td><%= link_to lot.code, lot_path(lot), class: "link-secondary" %></td>
-              <td><%= I18n.localize(lot.start_date.to_date) %></td>
-              <td><%= I18n.localize(lot.limit_date.to_date) %></td>
-              <td><%= number_to_currency(lot.minimum_bid) %></td>
-              <td><%= lot_bid_count %></td>
-              <td><%= number_to_currency(lot.lot_bids.maximum(:bid)) %></td>
-              <% if lot_bid_count == 0 %>
-                <td><%= button_to 'Cancelar', cancelled_lot_path(lot.id), class: 'btn btn-outline-secondary btn-sm' %></td>
-              <% else %>
-                <td><%= button_to 'Encerrar', closed_lot_path(lot.id), class: 'btn btn-outline-secondary btn-sm' %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p class="text-center">Não existem lotes no momento.</p>
-    <% end %>
-  </div>
-  <hr>
-  <div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-    <h5 class="text-center">Aguardando aprovação</h5>
-  </div>
-  <div class="container div-max-width mb-4">
-    <% if @waiting_approval_lots.any? %>
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr class="text-center">
-            <th><%= Lot.human_attribute_name(:code) %></th>
-            <th><%= Lot.human_attribute_name(:start_date) %></th>
-            <th><%= Lot.human_attribute_name(:limit_date) %></th>
-            <th><%= Lot.human_attribute_name(:minimum_bid) %></th>
-            <th>Qtd de itens</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <% @waiting_approval_lots.each do |lot| %>
-            <% lot_items_count =  lot.lot_items.count %>
-            <tr class="text-center">
-              <td><%= link_to lot.code, lot_path(lot), class: "link-secondary" %></td>
-              <td><%= I18n.localize(lot.start_date.to_date) %></td>
-              <td><%= I18n.localize(lot.limit_date.to_date) %></td>
-              <td><%= number_to_currency(lot.minimum_bid) %></td>
-              <td><%= lot_items_count %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p class="text-center">Não existem lotes no momento.</p>
-    <% end %>
-  </div>
-<% end %>
-<hr>
+</div>
+  
 <div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-  <h5 class="text-center">Aprovados - em andamento</h5>
+  <h5 class="text-center">Expirados</h5>
+  <hr>
+</div>
+<div class="container div-max-width mb-4">
+  <% if @approved_expired_lots.any? %>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr class="text-center">
+          <th><%= Lot.human_attribute_name(:code) %></th>
+          <th><%= Lot.human_attribute_name(:start_date) %></th>
+          <th><%= Lot.human_attribute_name(:limit_date) %></th>
+          <th><%= Lot.human_attribute_name(:minimum_bid) %></th>
+          <th>Qtd lances</th>
+          <th>Ultimo lance</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @approved_expired_lots.each do |lot| %>
+          <% lot_bid_count =  lot.lot_bids.count %>
+          <tr class="text-center">
+            <td><%= link_to lot.code, lot_path(lot), class: "link-secondary" %></td>
+            <td><%= I18n.localize(lot.start_date.to_date) %></td>
+            <td><%= I18n.localize(lot.limit_date.to_date) %></td>
+            <td><%= number_to_currency(lot.minimum_bid) %></td>
+            <td><%= lot_bid_count %></td>
+            <td><%= number_to_currency(lot.lot_bids.maximum(:bid)) %></td>
+            <% if lot_bid_count == 0 %>
+              <td><%= button_to 'Cancelar', cancelled_lot_path(lot.id), class: 'btn btn-outline-secondary btn-sm' %></td>
+            <% else %>
+              <td><%= button_to 'Encerrar', closed_lot_path(lot.id), class: 'btn btn-outline-secondary btn-sm' %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="text-center">Não existem lotes no momento.</p>
+  <% end %>
+</div>
+  
+<div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
+  <h5 class="text-center">Aguardando aprovação</h5>
+  <hr>
+</div>
+<div class="container div-max-width mb-4">
+  <% if @waiting_approval_lots.any? %>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr class="text-center">
+          <th><%= Lot.human_attribute_name(:code) %></th>
+          <th><%= Lot.human_attribute_name(:start_date) %></th>
+          <th><%= Lot.human_attribute_name(:limit_date) %></th>
+          <th><%= Lot.human_attribute_name(:minimum_bid) %></th>
+          <th>Qtd de itens</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @waiting_approval_lots.each do |lot| %>
+          <% lot_items_count = lot.lot_items.count %>
+          <tr class="text-center">
+            <td><%= link_to lot.code, lot_path(lot), class: "link-secondary" %></td>
+            <td><%= I18n.localize(lot.start_date.to_date) %></td>
+            <td><%= I18n.localize(lot.limit_date.to_date) %></td>
+            <td><%= number_to_currency(lot.minimum_bid) %></td>
+            <td><%= lot_items_count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="text-center">Não existem lotes no momento.</p>
+  <% end %>
+</div>
+
+<div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
+  <h5 class="text-center">Em andamento</h5>
+  <hr>
 </div>
 <div class="container div-max-width mb-4">
   <% if @approved_in_progress_lots.any? %>
@@ -114,9 +115,10 @@
     <p class="text-center">Não existem lotes no momento.</p>
   <% end %>
 </div>
-<hr>
+
 <div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-  <h5 class="text-center">Aprovados - futuros</h5>
+  <h5 class="text-center">Futuros</h5>
+  <hr>
 </div>
 <div class="container div-max-width mb-4">
   <% if @approved_future_lots.any? %>
@@ -144,9 +146,10 @@
     <p class="text-center">Não existem lotes no momento.</p>
   <% end %>
 </div>
-<hr>
+
 <div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
   <h5 class="text-center">Cancelados</h5>
+  <hr>
 </div>
 <div class="container div-max-width mb-4">
   <% if @cancelled_lots.any? %>
@@ -161,6 +164,37 @@
       </thead>
       <tbody class="table-group-divider">
         <% @cancelled_lots.each do |lot| %>
+          <tr class="text-center">
+            <td><%= link_to lot.code, lot_path(lot), class: "link-secondary" %></td>
+            <td><%= I18n.localize(lot.start_date.to_date) %></td>
+            <td><%= I18n.localize(lot.limit_date.to_date) %></td>
+            <td><%= number_to_currency(lot.minimum_bid) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="text-center">Não existem lotes no momento.</p>
+  <% end %>
+</div>
+
+<div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
+  <h5 class="text-center">Encerrados</h5>
+  <hr>
+</div>
+<div class="container div-max-width mb-4">
+  <% if @closed_lots.any? %>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr class="text-center">
+          <th><%= Lot.human_attribute_name(:code) %></th>
+          <th><%= Lot.human_attribute_name(:start_date) %></th>
+          <th><%= Lot.human_attribute_name(:limit_date) %></th>
+          <th><%= Lot.human_attribute_name(:minimum_bid) %></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @closed_lots.each do |lot| %>
           <tr class="text-center">
             <td><%= link_to lot.code, lot_path(lot), class: "link-secondary" %></td>
             <td><%= I18n.localize(lot.start_date.to_date) %></td>

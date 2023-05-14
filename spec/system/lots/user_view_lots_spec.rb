@@ -71,8 +71,8 @@ describe 'Usuário visita página de Controle de Lotes' do
 
     #Assert
     expect(page).to have_content 'Aguardando aprovação'
-    expect(page).to have_content 'Aprovados - em andamento'
-    expect(page).to have_content 'Aprovados - futuros'
+    expect(page).to have_content 'Em andamento'
+    expect(page).to have_content 'Futuros'
     expect(page).to have_content 'Não existem lotes no momento.'
   end
 end

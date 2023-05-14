@@ -11,6 +11,7 @@ class LotsController < ApplicationController
     @approved_future_lots = Lot.approved.where("start_date > ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
     @approved_expired_lots = Lot.approved.where("limit_date < ?", Date.today).order(:start_date, :limit_date)
     @cancelled_lots = Lot.cancelled.order(:start_date, :limit_date)
+    @closed_lots = Lot.closed.order(:start_date, :limit_date)
   end
 
   def new
@@ -35,6 +36,9 @@ class LotsController < ApplicationController
       @lot_approver = LotApprover.where(lot_id: @lot).first
     end
     @bid_max = LotBid.where(lot_id: @lot).maximum(:bid)
+    if params[:user].present?
+      @winner_user = User.find(params[:user])
+    end
   end
 
   def approved
