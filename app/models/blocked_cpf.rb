@@ -1,30 +1,10 @@
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
-  has_many :lot_approvers
-  has_many :lot, through: :lot_approvers
-
-  has_many :lot_bids
-  has_many :lot, through: :lot_bids
- 
-  validates :name, :cpf, presence: true
+class BlockedCpf < ApplicationRecord
+  validates :cpf, :name, presence: true
   validates :cpf, uniqueness: true
   validate :check_cpf
-  validate :check_cpf_blocked
-  before_create :set_admin
- 
-  enum status: {blocked: 0, unblocked: 2}
+  validate :check_cpf_used
 
-  def perfil
-    if self.admin?
-      'administrador'
-    else
-      'visitante'
-    end
-  end
+  enum status: {blocked: 0, unblocked: 2}
 
   def valida_cpf
     # return false if self.cpf.nil?
@@ -53,18 +33,12 @@ class User < ApplicationRecord
       self.errors.add(:cpf, " inválido.")
     end
   end
-
-  def check_cpf_blocked
-    cpf_blocked = BlockedCpf.find_by(cpf: self.cpf)
-
-    if cpf_blocked.present?
-      self.errors.add(:cpf, " bloqueado.")
-    end
-  end
   
-  private
+  def check_cpf_used
+    cpf_user = User.find_by(cpf: self.cpf)
 
-  def set_admin
-    self.admin = true if self.email.include?('@leilaodogalpao.com.br')
+    if cpf_user.present?
+      self.errors.add(:cpf, " pertence a um usuário do sistema. Faça pelo bloqueio mais abaixo.")
+    end
   end
 end

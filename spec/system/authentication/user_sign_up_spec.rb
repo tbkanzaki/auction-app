@@ -123,4 +123,27 @@ describe 'Usuário se cadastra' do
     expect(page).to have_content 'Não foi possível salvar usuário'
     expect(page).not_to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
   end
+
+  it 'com cpf bloqueado' do
+    # Arrange
+    BlockedCpf.create!(cpf: '12933524112', name: 'José Sousa')
+
+    # Act
+    visit('/') 
+    click_on 'Entrar'
+    click_on 'Criar conta'
+    within('form') do
+      fill_in 'Nome', with: 'José Sousa'
+      fill_in 'CPF', with: '12933524112'
+      fill_in 'E-mail', with: 'jose@provedor.com'
+      fill_in 'Senha', with: 'senha1234'
+      fill_in 'Confirme sua senha', with: 'senha1234'
+      click_on 'Criar conta'
+    end
+
+    # Assert
+    expect(page).to have_content 'Não foi possível salvar usuário'
+    expect(page).to have_content 'CPF bloqueado.'
+    expect(page).not_to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
+  end
 end

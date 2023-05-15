@@ -31,6 +31,9 @@
                 <li class="nav-item">
                   <%= link_to "Controle de Lotes", lots_path, class: "nav-link text-light" %>
                 </li>
+                <li class="nav-item">
+                  <%= link_to "Controle de CPF", blocked_cpfs_path, class: "nav-link text-light" %>
+                </li>
               <% end %>
               <% if user_signed_in? && !current_user.admin? %>
                 <li class="nav-item">

@@ -62,5 +62,20 @@ end
       expect(user.errors.include?(:cpf)).to be true
       expect(user.errors[:cpf]).to include(" inválido.")
     end
+
+    it 'true (errors.include) quando o cpf está bloqueado' do
+      # Arrange
+      BlockedCpf.create!(cpf: '32430478544', name: 'José Sousa')
+
+      user = User.new(name: 'José Sousa', email:'jose@provedor.com', password:'senha1234', cpf: '32430478544')
+
+      # Act
+      user.valid?
+      result = user.errors.include?(:cpf)
+
+      # Assert
+      expect(user.errors.include?(:cpf)).to be true
+      expect(user.errors[:cpf]).to include(" bloqueado.")
+    end
   end
 end

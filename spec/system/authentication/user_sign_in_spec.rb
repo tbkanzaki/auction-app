@@ -49,6 +49,25 @@ describe 'Usuário se autentica' do
     end
   end
 
+  it 'como visitante bloqueado' do
+    # Arrange
+    user = User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
+    user.blocked!
+
+    # Act
+    visit('/') 
+    click_on 'Entrar'
+    within('form') do
+      fill_in 'E-mail', with: 'maria@provedor.com'
+      fill_in 'Senha', with: 'senha1234'
+      click_on 'Entrar'
+    end
+
+    # Assert
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Seu CPF está bloqueado. Você não pode fazer lances em leilões.'
+  end
+
   it 'como admin e faz logout' do
     # Arrange
     User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
