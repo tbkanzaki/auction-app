@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   has_one_attached :product_image
   belongs_to :category
   has_many :lot_items
-  has_many :lot, through: :lot_items
+  has_many :lots, through: :lot_items
   
   validates :code, :name, :weight, :width, :height, :depth, presence: true
 

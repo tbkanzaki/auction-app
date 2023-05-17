@@ -15,7 +15,7 @@
   <%= form_with(model: @lot) do |f| %>
     <div class="mb-3">
       <%= f.label :code %>
-      <%= f.text_field :code, class: 'form-control mb-2'  %>
+      <%= f.text_field :code, class: 'form-control mb-2', autofocus: true  %>
     </div>
     <div class="mb-3">
       <%= f.label :start_date %>

@@ -4,11 +4,7 @@ class BlockedCpf < ApplicationRecord
   validate :check_cpf
   validate :check_cpf_used
 
-  enum status: {blocked: 0, unblocked: 2}
-
   def valida_cpf
-    # return false if self.cpf.nil?
-  
     nulos = %w{12345678909 11111111111 22222222222 33333333333 44444444444 55555555555 66666666666 77777777777 88888888888 99999999999 00000000000 12345678909}
     valor = self.cpf.scan /[0-9]/
     if valor.length == 11

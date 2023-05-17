@@ -31,6 +31,8 @@ class LotsController < ApplicationController
   end
 
   def show
+    @lot_doubts = LotDoubt.where(lot: @lot).unblocked
+    
     @lot_bid = Lot.new
     if @lot.approved?
       @lot_approver = LotApprover.where(lot_id: @lot).first

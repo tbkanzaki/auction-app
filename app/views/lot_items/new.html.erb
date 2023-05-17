@@ -2,7 +2,7 @@
   <h5 class="text-center">Novo Item do Lote <%= @lot.code%></h5>
 </div>
 
-<% if @products.present? %>
+<% if @products.any? %>
   <div class="container div-max-width">
     <%= form_with(model: [@lot, @lot_item]) do |f| %>
       <div class="mb-3">

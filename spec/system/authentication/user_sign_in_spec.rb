@@ -19,7 +19,8 @@ describe 'Usuário se autentica' do
     within('nav') do
       expect(page).to have_content 'Categorias'
       expect(page).to have_content 'administrador'
-      expect(page).to have_content 'Tereza Barros - tereza@leilaodogalpao.com.br'
+      expect(page).to have_content 'Tereza Barros'
+      expect(page).to have_content 'tereza@leilaodogalpao.com.br'
       expect(page).not_to have_link 'Entrar'
       expect(page).to have_button 'Sair'
     end
@@ -43,7 +44,8 @@ describe 'Usuário se autentica' do
     within('nav') do
       expect(page).not_to have_content 'Cadastrar Categoria'
       expect(page).to have_content 'visitante'
-      expect(page).to have_content 'Maria Sousa - maria@provedor.com'
+      expect(page).to have_content 'Maria Sousa'
+      expect(page).to have_content 'maria@provedor.com'
       expect(page).not_to have_link 'Entrar'
       expect(page).to have_button 'Sair'
     end
@@ -65,7 +67,7 @@ describe 'Usuário se autentica' do
 
     # Assert
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Seu CPF está bloqueado. Você não pode fazer lances em leilões.'
+    expect(page).to have_content 'Seu CPF está bloqueado. Você não pode fazer lances em leilões nem enviar novas dúvidas para um lote.'
   end
 
   it 'como admin e faz logout' do

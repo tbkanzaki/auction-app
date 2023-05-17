@@ -5,18 +5,22 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :lot_approvers
-  has_many :lot, through: :lot_approvers
+  has_many :lots, through: :lot_approvers
 
   has_many :lot_bids
-  has_many :lot, through: :lot_bids
- 
+  has_many :lots, through: :lot_bids
+  
+  has_many :lot_doubts
+
+  has_many :lot_doubt_answers
+
   validates :name, :cpf, presence: true
   validates :cpf, uniqueness: true
   validate :check_cpf
   validate :check_cpf_blocked
   before_create :set_admin
  
-  enum status: {blocked: 0, unblocked: 2}
+  enum status: {unblocked: 0, blocked: 2}
 
   def perfil
     if self.admin?
@@ -27,8 +31,6 @@ class User < ApplicationRecord
   end
 
   def valida_cpf
-    # return false if self.cpf.nil?
-  
     nulos = %w{12345678909 11111111111 22222222222 33333333333 44444444444 55555555555 66666666666 77777777777 88888888888 99999999999 00000000000 12345678909}
     valor = self.cpf.scan /[0-9]/
     if valor.length == 11

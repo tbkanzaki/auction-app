@@ -34,6 +34,9 @@
                 <li class="nav-item">
                   <%= link_to "Controle de CPF", blocked_cpfs_path, class: "nav-link text-light" %>
                 </li>
+                <li class="nav-item">
+                  <%= link_to "Perguntas/Respostas",  lot_doubt_answers_path, class: "nav-link text-light" %>
+                </li>
               <% end %>
               <% if user_signed_in? && !current_user.admin? %>
                 <li class="nav-item">
@@ -41,13 +44,13 @@
                 </li>
               <% end %>
             </ul>
-            <div class="ml-auto d-flex">
+            <div class="ml-auto d-flex d-flex align-items-center">
               <% if user_signed_in? %>
-                <%= current_user.perfil %> - 
-                <%= current_user.name %> - <%= current_user.email %> 
-                <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: "ms-4 btn btn-light btn-sm" %>
+                <%= current_user.perfil %> - <%= current_user.name %>
+                <br><%= current_user.email %> 
+                <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: "ms-4 btn btn-light btn-sm me-4" %>
               <% else %>
-                  <%= link_to 'Entrar', new_user_session_path, class: "nav-link text-light" %> 
+                  <%= link_to 'Entrar', new_user_session_path, class: "ms-4 btn btn-light btn-sm me-4" %> 
               <% end %>
             </div>
           </div>

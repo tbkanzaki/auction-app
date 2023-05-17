@@ -4,7 +4,7 @@ class LotBidsController < ApplicationController
   before_action :check_bid, only: [:create]
 
   def index
-    @lot_winner = LotBid.select('MAX(bid), lot_id, user_id, bid').group(:lot_id)
+    @lot_winner = LotBid.select('MAX(bid), lot_id, lot_bids.user_id, bid').joins(:lot).where(lots: { status: 'closed' }).group(:lot_id)
   end
 
   def new

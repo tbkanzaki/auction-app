@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def check_user_blocked
     if user_signed_in? && current_user.blocked?
       sign_out current_user
-      flash[:alert] = "Seu CPF está bloqueado. Você não pode fazer lances em leilões."
+      flash[:alert] = "Seu CPF está bloqueado. Você não pode fazer lances em leilões nem enviar novas dúvidas para um lote."
       redirect_to root_path
     end
   end

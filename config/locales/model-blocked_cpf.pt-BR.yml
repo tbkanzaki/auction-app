@@ -1,6 +1,4 @@
 pt-BR:
-  blocked: "Bloqueado"
-  unblocked: "Desbloqueado"
   activerecord:
     models:
       blocked_cpf: CPF Bloqueado

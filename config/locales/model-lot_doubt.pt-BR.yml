@@ -1,0 +1,12 @@
+pt-BR:
+  blocked: "Bloqueada"
+  unblocked: "Desbloqueada"
+  activerecord:
+    models:
+      lot_doubt: Dúvida
+    attributes:
+      lot_doubt:
+        lot_id: "Lote"
+        user_id: "Quem perguntou"
+        question: "Pergunta"
+        status: "Status"

@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      lot_doubt_answer: Resposta da pergunta
+    attributes:
+      lot_doubt_answer:
+        lot_doubt_id: "Pergunta"
+        lot_doubt: "Pergunta"
+        user_id: "Quem respondeu"
+        answer: "Resposta"

@@ -1,0 +1,27 @@
+<div class="container shadow p-2 mb-4 bg-body-tertiary rounded div-max-width">
+  <h5 class="text-center">Pergunta para o lote <%= @lot.code%></h5>
+</div>
+
+<div class="container text-center text-danger div-max-width">
+  <% if @lot.errors.any? %>
+    <dl>
+      <% @lot.errors.full_messages.each do |msg| %>
+        <dt><%= msg %></dt>
+      <% end %>
+    </dl>
+  <% end %>
+</div>
+
+<div class="container div-max-width">
+  <%= form_with(model: [@lot, @lot_doubt]) do |f| %>
+    <div class="mb-3">
+      <%= f.label :question %>
+      <%= f.text_area :question, class: 'form-control mb-2', autofocus: true  %>
+      </div>
+    <div class="mb-3">
+      <%= f.submit 'Salvar', class: 'btn btn-secondary btn-sm mt-2' %>
+      <%= link_to 'Voltar', lot_path(@lot), class: 'btn btn-secondary  btn-sm mt-2 ms-2' %>
+    </div>
+  <% end %>
+</div>
+  

@@ -9,6 +9,7 @@
         <tr>
           <th>Lote</th>
           <th>Lance vencedor</th>
+          <th>Mensagem</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
@@ -17,6 +18,7 @@
             <tr>
               <td><%= link_to item.lot.code, lot_path(item.lot.id,user: item.user.id), class: "link-secondary" %></td>
               <td><%= item.bid %></td>
+              <td>Parabéns! Você arrematou o lote. Entraremos em contato!</td>
             </tr>
           <% end %> 
         <% end %>   

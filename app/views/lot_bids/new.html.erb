@@ -6,11 +6,11 @@
   <%= form_with(model: [@lot, @lot_bid]) do |f| %>
     <div class="mb-3">
       <%= f.label :bid %>
-      <%= f.number_field :bid, class: 'form-control mb-2'  %>
+      <%= f.number_field :bid, class: 'form-control mb-2', autofocus: true %>
       </div>
     <div class="mb-3">
       <%= f.submit 'Salvar', class: 'btn btn-secondary btn-sm mt-2' %>
-      <%= link_to 'Voltar', :back, class: 'btn btn-secondary  btn-sm mt-2 ms-2' %>
+      <%= link_to 'Voltar', lot_path(@lot), class: 'btn btn-secondary  btn-sm mt-2 ms-2' %>
     </div>
   <% end %>
 </div>

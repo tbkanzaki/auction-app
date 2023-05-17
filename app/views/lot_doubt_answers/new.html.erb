@@ -1,0 +1,31 @@
+<div class="container shadow p-2 mt-2 bg-body-tertiary rounded div-max-width">
+  <h5 class="text-center">Cadastrar Resposta</h5>
+</div>
+
+<div class="container text-center text-danger div-max-width">
+  <% if @lot_doubt_answer.errors.any? %>
+    <dl>
+      <% @lot_doubt_answer.errors.full_messages.each do |msg| %>
+        <dt><%= msg %></dt>
+      <% end %>
+    </dl>
+  <% end %>
+</div>
+
+<div class="container div-max-width mt-4">
+  <%= form_with(model: [@lot_doubt, @lot_doubt_answer]) do |f| %>
+    <dl>
+      <dt>Pergunta</dt>
+      <dd><%= @lot_doubt.question %></dd>
+    </dl>
+    <div class="mb-3">
+      <%= f.label :answer %>
+      <%= f.text_area :answer, class: 'form-control mb-2', autofocus: true %>
+      </div>
+    <div class="mb-3">
+      <%= f.submit 'Salvar', class: 'btn btn-secondary btn-sm mt-2' %>
+      <%= link_to 'Voltar', lot_doubt_answers_path, class: 'btn btn-secondary  btn-sm mt-2 ms-2' %>
+    </div>
+  <% end %>
+</div>
+  

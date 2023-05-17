@@ -22,7 +22,8 @@ describe 'Usuário se cadastra' do
     within('nav') do
       expect(page).not_to have_link 'Entrar'
       expect(page).to have_button 'Sair'
-      expect(page).to have_content "Tereza Barros - tereza@leilaodogalpao.com.br"
+      expect(page).to have_content "Tereza Barros"
+      expect(page).to have_content "tereza@leilaodogalpao.com.br"
       expect(page).to have_content 'administrador'
       expect(page).to have_content 'Categorias'
     end
@@ -49,7 +50,8 @@ describe 'Usuário se cadastra' do
     within('nav') do
       expect(page).not_to have_link 'Entrar'
       expect(page).to have_button 'Sair'
-      expect(page).to have_content "Maria Sousa - maria@provedor.com"
+      expect(page).to have_content "Maria Sousa"
+      expect(page).to have_content "maria@provedor.com"
       expect(page).to have_content 'visitante'
       expect(page).not_to have_content 'Cadastrar Categoria'
     end

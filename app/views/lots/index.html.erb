@@ -1,14 +1,13 @@
-<div class="container shadow p-2 mb-3 mt-2bg-body-tertiary rounded div-max-width">
-  <h3 class="text-center">Controle de Lotes</h3>
+<div class="container shadow bg-body-tertiary rounded div-max-width mt-2 p-2">
+  <h2 class="text-center">Controle de Lotes</h2>
 </div>
 
 <div class="container div-max-width p-2 mb-3">
   <%= link_to 'Novo Lote', new_lot_path, class: 'btn btn-secondary' %>
 </div>
   
-<div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-  <h5 class="text-center">Expirados</h5>
-  <hr>
+<div class="container shadow bg-body-tertiary rounded div-max-width mt-4 p-1">
+  <h4 class="text-center">Expirados</h4>
 </div>
 <div class="container div-max-width mb-4">
   <% if @approved_expired_lots.any? %>
@@ -47,9 +46,8 @@
   <% end %>
 </div>
   
-<div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-  <h5 class="text-center">Aguardando aprovação</h5>
-  <hr>
+<div class="container shadow bg-body-tertiary rounded div-max-width mt-4 p-1">
+  <h4 class="text-center">Aguardando aprovação</h4>
 </div>
 <div class="container div-max-width mb-4">
   <% if @waiting_approval_lots.any? %>
@@ -81,9 +79,8 @@
   <% end %>
 </div>
 
-<div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-  <h5 class="text-center">Em andamento</h5>
-  <hr>
+<div class="container shadow bg-body-tertiary rounded div-max-width mt-4 p-1">
+  <h4 class="text-center">Em andamento</h4>
 </div>
 <div class="container div-max-width mb-4">
   <% if @approved_in_progress_lots.any? %>
@@ -116,9 +113,8 @@
   <% end %>
 </div>
 
-<div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-  <h5 class="text-center">Futuros</h5>
-  <hr>
+<div class="container shadow bg-body-tertiary rounded div-max-width mt-4 p-1">
+  <h4 class="text-center">Futuros</h4>
 </div>
 <div class="container div-max-width mb-4">
   <% if @approved_future_lots.any? %>
@@ -147,9 +143,8 @@
   <% end %>
 </div>
 
-<div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-  <h5 class="text-center">Cancelados</h5>
-  <hr>
+<div class="container shadow bg-body-tertiary rounded div-max-width mb-4 p-1">
+  <h4 class="text-center">Cancelados</h4>
 </div>
 <div class="container div-max-width mb-4">
   <% if @cancelled_lots.any? %>
@@ -178,9 +173,8 @@
   <% end %>
 </div>
 
-<div class="container shadow bg-body-tertiary rounded div-max-width mb-4">
-  <h5 class="text-center">Encerrados</h5>
-  <hr>
+<div class="container shadow bg-body-tertiary rounded div-max-width mt-4 p-1">
+  <h4 class="text-center">Encerrados</h4>
 </div>
 <div class="container div-max-width mb-4">
   <% if @closed_lots.any? %>
