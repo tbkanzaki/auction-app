@@ -75,9 +75,9 @@
             <td><%= user.cpf %></td>
             <td><%= user.name %></td>
             <% if user.blocked? %>
-              <td><%= button_to 'Desbloquear', unblocked_user_path(user.id), class: 'btn btn-outline-secondary btn-sm' %></td>
+              <td><%= button_to 'Desbloquear', unblocked_user_path(user.id), class: 'btn btn-outline-secondary btn-sm', id: dom_id(user) %></td>
             <% else %>
-              <td><%= button_to 'Bloquear', blocked_user_path(user.id), class: 'btn btn-outline-secondary btn-sm' %></td>
+              <td><%= button_to 'Bloquear', blocked_user_path(user.id), class: 'btn btn-outline-secondary btn-sm', id: dom_id(user) %></td>
             <% end %>
           </tr>
         <% end %>

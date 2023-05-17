@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário registra cpf para bloqueio' do
+describe 'Usuário bloqueia cpf ainda não cadastrado no sistema' do
   it 'a partir da tela inicial, como visitante' do
     #Arrange
     user = User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
@@ -30,7 +30,7 @@ describe 'Usuário registra cpf para bloqueio' do
     expect(page).to have_field('Nome')
   end
 
-  it 'e faz cadastro de cpf não cadastradao no sistema, como administrador ' do
+  it 'com sucesso, como administrador ' do
     #Arrange
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
 
@@ -47,7 +47,7 @@ describe 'Usuário registra cpf para bloqueio' do
     expect(page).to have_content 'CPF cadastrado com sucesso.'
   end
 
-  it 'e faz cadastro de cpf de um usuário do sistema, como administrador ' do
+  it 'de um usuário já cadastrado no sistema, como administrador ' do
     #Arrange
     User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
@@ -66,7 +66,7 @@ describe 'Usuário registra cpf para bloqueio' do
     expect(page).to have_content 'CPF pertence a um usuário do sistema. Faça pelo bloqueio mais abaixo.'
   end
 
-  it 'e faz cadastro dados incompletos, como administrador' do
+  it 'com dados incompletos, como administrador' do
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
 
     #Act
@@ -99,20 +99,23 @@ describe 'Usuário registra cpf para bloqueio' do
     expect(page).to have_content 'CPF não cadastrado.'
     expect(page).to have_content 'CPF inválido.'
   end
-  
-  it 'e bloqueia usuário do sistema, como administrador' do
+end
+
+describe 'Usuário bloqueia cpf de usuário do sistema' do
+  it 'com sucesso, como administrador' do
+    user_maria = User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
     user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
 
     #Act
     login_as(user)
     visit root_path
     click_on 'Controle de CPF'
-    fill_in 'CPF', with: '04837505700'
-    click_on 'Salvar'
+    find_button('Bloquear', id: 'user_1').click()
     
     #Assert
     expect(current_path).to eq blocked_cpfs_path
-    expect(page).to have_content 'CPF não cadastrado.'
-     expect(page).to have_content 'CPF inválido.'
+    expect(page).to have_content 'Usuário bloqueado com sucesso.'
+    expect(page).to have_content 'Maria Sousa'
+    expect(page).to have_selector(:link_or_button, 'Desbloquear', id: 'user_1')
   end
-end
+end 
