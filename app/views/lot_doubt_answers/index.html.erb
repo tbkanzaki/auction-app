@@ -14,7 +14,7 @@
       </thead>
       <tbody class="table-group-divider">
         <% @lot_doubt_answers.each do |lot_doubt_answer| %>
-          <tr class="text-center">
+          <tr>
             <td><%= lot_doubt_answer.lot.code %></td>
             <td><%= lot_doubt_answer.question %></td>
             <td><%= link_to 'Responder', new_lot_doubt_lot_doubt_answer_path(lot_doubt_answer.id), class: 'btn btn-outline-secondary btn-sm', id: dom_id(lot_doubt_answer) %></td>

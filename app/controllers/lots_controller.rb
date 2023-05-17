@@ -9,7 +9,7 @@ class LotsController < ApplicationController
     @waiting_approval_lots = Lot.waiting_approval.order(:start_date, :limit_date)
     @approved_in_progress_lots = Lot.approved.where("start_date <= ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
     @approved_future_lots = Lot.approved.where("start_date > ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
-    @approved_expired_lots = Lot.approved.where("limit_date < ?", Date.today).order(:start_date, :limit_date)
+    @approved_expired_lots = Lot.where("limit_date < ?", Date.today).order(:start_date, :limit_date)
     @cancelled_lots = Lot.cancelled.order(:start_date, :limit_date)
     @closed_lots = Lot.closed.order(:start_date, :limit_date)
   end
@@ -32,6 +32,7 @@ class LotsController < ApplicationController
 
   def show
     @lot_doubts = LotDoubt.where(lot: @lot).unblocked
+    @favorite_lot_user = @lot.favorite_lots.find_by(user_id: current_user.id) if user_signed_in?
     
     @lot_bid = Lot.new
     if @lot.approved?

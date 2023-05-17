@@ -47,10 +47,15 @@
             <% end %>
           <% end %>
         <% else %>
-          <dt class="col-sm-12 mt-2"> 
-            <% if user_signed_in? && !current_user.admin? && current_user.unblocked? && Date.today.between?(@lot.start_date, @lot.limit_date)  %>
-              <%= link_to 'Dar lance', new_lot_lot_bid_path(@lot.id), class: 'btn btn-secondary btn-sm' %>
-              <%= link_to 'Enviar dúvida', new_lot_lot_doubt_path(@lot.id), class: 'btn btn-secondary btn-sm' %>
+          <dt class="col-sm-12 mt-2 d-flex"> 
+            <% if user_signed_in? && !current_user.admin? && current_user.unblocked? && Date.today.between?(@lot.start_date, @lot.limit_date) %>
+              <%= link_to 'Dar lance', new_lot_lot_bid_path(@lot.id), class: 'btn btn-secondary btn-sm me-4' %>
+              <%= link_to 'Enviar dúvida', new_lot_lot_doubt_path(@lot.id), class: 'btn btn-secondary btn-sm me-4' %>
+              <% if @favorite_lot_user.present? %>
+                <%= button_to 'Remover dos favoritos', lot_favorite_lot_path(@lot.id, @favorite_lot_user.id), class: 'btn btn-secondary btn-sm', method: :delete %>
+              <% else %>
+                <%= button_to 'Adicionar aos favoritos', lot_favorite_lots_path(@lot.id), class: 'btn btn-secondary btn-sm', method: :post %>
+              <% end %>
             <% end %>
           </dt>
         <% end %>

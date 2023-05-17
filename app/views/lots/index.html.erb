@@ -58,7 +58,7 @@
           <th><%= Lot.human_attribute_name(:start_date) %></th>
           <th><%= Lot.human_attribute_name(:limit_date) %></th>
           <th><%= Lot.human_attribute_name(:minimum_bid) %></th>
-          <th>Qtd de itens</th>
+          <th>Itens cadastrados</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
@@ -80,7 +80,7 @@
 </div>
 
 <div class="container shadow bg-body-tertiary rounded div-max-width mt-4 p-1">
-  <h4 class="text-center">Em andamento</h4>
+  <h4 class="text-center">Aprovados - Em andamento</h4>
 </div>
 <div class="container div-max-width mb-4">
   <% if @approved_in_progress_lots.any? %>
@@ -114,7 +114,7 @@
 </div>
 
 <div class="container shadow bg-body-tertiary rounded div-max-width mt-4 p-1">
-  <h4 class="text-center">Futuros</h4>
+  <h4 class="text-center">Aprovados - Futuros</h4>
 </div>
 <div class="container div-max-width mb-4">
   <% if @approved_future_lots.any? %>

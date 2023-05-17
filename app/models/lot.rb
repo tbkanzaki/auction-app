@@ -10,6 +10,7 @@ class Lot < ApplicationRecord
   has_many :users, through: :lot_bids
 
   has_many :lot_doubts
+  has_many :favorite_lots
 
   has_many :lot_doubt_answers, through: :lot_doubts
 

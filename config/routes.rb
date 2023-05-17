@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   resources :blocked_cpfs, only: [:index, :new, :create, :destroy]
   resources :products, only: [:index, :new, :create, :show, :edit, :update] 
   resources :lot_bids, only: [:index]
-
+  resources :favorite_lots, on: :member, only: [:index]
+  
   resources :lots, only: [:index, :new, :create, :show] do
     post :approved, on: :member
     post :closed, on: :member
@@ -27,5 +28,6 @@ Rails.application.routes.draw do
     resources :lot_items, on: :member , only: [:new, :create, :destroy]
     resources :lot_bids, on: :member, only: [:new, :create, :index]
     resources :lot_doubts, on: :member, only: [:new, :create]
+    resources :favorite_lots, on: :member, only: [:create, :destroy]
   end
 end

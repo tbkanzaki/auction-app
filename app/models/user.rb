@@ -11,8 +11,8 @@ class User < ApplicationRecord
   has_many :lots, through: :lot_bids
   
   has_many :lot_doubts
-
   has_many :lot_doubt_answers
+  has_many :favorite_lots
 
   validates :name, :cpf, presence: true
   validates :cpf, uniqueness: true
