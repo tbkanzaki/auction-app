@@ -29,5 +29,6 @@ Rails.application.routes.draw do
     resources :lot_bids, on: :member, only: [:new, :create, :index]
     resources :lot_doubts, on: :member, only: [:new, :create]
     resources :favorite_lots, on: :member, only: [:create, :destroy]
+    get 'search', on: :collection
   end
 end

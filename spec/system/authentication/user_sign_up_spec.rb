@@ -8,12 +8,12 @@ describe 'Usuário se cadastra' do
     visit('/') 
     click_on 'Entrar'
     click_on 'Criar conta'
-    within('form') do
-      fill_in 'Nome', with: 'Tereza Barros'
-      fill_in 'CPF', with: '56685728701'
-      fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
-      fill_in 'Senha', with: 'senha1234'
-      fill_in 'Confirme sua senha', with: 'senha1234'
+    fill_in 'Nome', with: 'Tereza Barros'
+    fill_in 'CPF', with: '56685728701'
+    fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
+    fill_in 'Senha', with: 'senha1234'
+    fill_in 'Confirme sua senha', with: 'senha1234'
+    within(".actions") do
      click_on 'Criar conta'
     end
 
@@ -36,12 +36,12 @@ describe 'Usuário se cadastra' do
     visit('/') 
     click_on 'Entrar'
     click_on 'Criar conta'
-    within('form') do
-      fill_in 'Nome', with: 'Maria Sousa'
-      fill_in 'CPF', with: '66610881090'
-      fill_in 'E-mail', with: 'maria@provedor.com'
-      fill_in 'Senha', with: 'senha1234'
-      fill_in 'Confirme sua senha', with: 'senha1234'
+    fill_in 'Nome', with: 'Maria Sousa'
+    fill_in 'CPF', with: '66610881090'
+    fill_in 'E-mail', with: 'maria@provedor.com'
+    fill_in 'Senha', with: 'senha1234'
+    fill_in 'Confirme sua senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Criar conta'
     end
 
@@ -64,13 +64,12 @@ describe 'Usuário se cadastra' do
     visit('/') 
     click_on 'Entrar'
     click_on 'Criar conta'
-    within('form') do
-      fill_in 'Nome', with: ''
-      fill_in 'CPF', with: ''
-      fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
-      fill_in 'Senha', with: 'senha1234'
-      fill_in 'Confirme sua senha', with: 'senha1234'
-
+    fill_in 'Nome', with: ''
+    fill_in 'CPF', with: ''
+    fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
+    fill_in 'Senha', with: 'senha1234'
+    fill_in 'Confirme sua senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Criar conta'
     end
 
@@ -88,12 +87,12 @@ describe 'Usuário se cadastra' do
     visit('/') 
     click_on 'Entrar'
     click_on 'Criar conta'
-    within('form') do
-      fill_in 'Nome', with: 'Tereza Barros'
-      fill_in 'CPF', with: '56685723301'
-      fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
-      fill_in 'Senha', with: 'senha1234'
-      fill_in 'Confirme sua senha', with: 'senha1234'
+    fill_in 'Nome', with: 'Tereza Barros'
+    fill_in 'CPF', with: '56685723301'
+    fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
+    fill_in 'Senha', with: 'senha1234'
+    fill_in 'Confirme sua senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Criar conta'
     end
 
@@ -111,12 +110,12 @@ describe 'Usuário se cadastra' do
     visit('/') 
     click_on 'Entrar'
     click_on 'Criar conta'
-    within('form') do
-      fill_in 'Nome', with: 'Maria Sousa'
-      fill_in 'CPF', with: '56685723301'
-      fill_in 'E-mail', with: 'maria@provedor.com'
-      fill_in 'Senha', with: 'senha1234'
-      fill_in 'Confirme sua senha', with: 'senha1234'
+    fill_in 'Nome', with: 'Maria Sousa'
+    fill_in 'CPF', with: '56685723301'
+    fill_in 'E-mail', with: 'maria@provedor.com'
+    fill_in 'Senha', with: 'senha1234'
+    fill_in 'Confirme sua senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Criar conta'
     end
 
@@ -134,12 +133,12 @@ describe 'Usuário se cadastra' do
     visit('/') 
     click_on 'Entrar'
     click_on 'Criar conta'
-    within('form') do
-      fill_in 'Nome', with: 'José Sousa'
-      fill_in 'CPF', with: '12933524112'
-      fill_in 'E-mail', with: 'jose@provedor.com'
-      fill_in 'Senha', with: 'senha1234'
-      fill_in 'Confirme sua senha', with: 'senha1234'
+    fill_in 'Nome', with: 'José Sousa'
+    fill_in 'CPF', with: '12933524112'
+    fill_in 'E-mail', with: 'jose@provedor.com'
+    fill_in 'Senha', with: 'senha1234'
+    fill_in 'Confirme sua senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Criar conta'
     end
 

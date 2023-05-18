@@ -68,11 +68,11 @@ describe 'Usuário visita página de perguntas' do
     #Act
     login_as(user_tereza)
     visit root_path
-    click_on 'Perguntas/Respostas'
+    click_on 'Central de Respostas'
 
     #Assert
     expect(current_path).to eq lot_doubt_answers_path
-    expect(page).to have_content 'Perguntas/Respostas'
+    expect(page).to have_content 'Central de Respostas'
   end
 
   it 'e cadastra a resposta com sucesso, como administrador' do
@@ -106,7 +106,7 @@ describe 'Usuário visita página de perguntas' do
     #Act
     login_as(user_tereza)
     visit root_path
-    click_on 'Perguntas/Respostas'
+    click_on 'Central de Respostas'
     find_link('Responder', id: 'lot_doubt_1').click()
     fill_in 'Resposta', with: 'Resposta da pergunta...' 
     click_on 'Salvar'
@@ -148,7 +148,7 @@ describe 'Usuário visita página de perguntas' do
     #Act
     login_as(user_tereza)
     visit root_path
-    click_on 'Perguntas/Respostas'
+    click_on 'Central de Respostas'
     find_link('Responder', id: 'lot_doubt_1').click()
     fill_in 'Resposta', with: '' 
     click_on 'Salvar'
@@ -189,7 +189,7 @@ describe 'Usuário visita página de perguntas' do
     #Act
     login_as(user_tereza)
     visit root_path
-    click_on 'Perguntas/Respostas'
+    click_on 'Central de Respostas'
     find_button('Bloquear', id: '1').click()
 
     #Assert

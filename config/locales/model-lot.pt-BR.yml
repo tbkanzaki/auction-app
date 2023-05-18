@@ -5,7 +5,9 @@ pt-BR:
   cancelled: "Cancelado"
   activerecord:
     models:
-      lot: Lote
+      lot:
+        one: Lote
+        other: Lotes
     attributes:
       lot:
         code: "Código"

@@ -76,7 +76,7 @@
           <% @lot.lot_items.each do |item| %>
             <tr>
               <td><%= link_to "#{item.product.code} - #{item.product.name}", product_path(item.product.id), class: "link-secondary" %></td>
-              <% if @lot.waiting_approval? %>
+              <% if @lot.waiting_approval? && user_signed_in? && current_user.admin? %>
                 <td><%= button_to 'Remover item', lot_lot_item_path(@lot.id,item), class: 'btn btn-outline-secondary btn-sm' , id: dom_id(item), method: :delete %></td>
               <% end %>
             </tr>
@@ -91,7 +91,7 @@
     <% if user_signed_in? && current_user.admin? %>
       <%= link_to 'Voltar', lots_path, class: 'btn btn-secondary me-2 btn-sm' %>
     <% else %>
-      <%= link_to 'Voltar', root_path, class: 'btn btn-secondary me-2 btn-sm' %>
+      <%= link_to 'Voltar', :back, class: 'btn btn-secondary me-2 btn-sm' %>
     <% end %> 
   </div>
 

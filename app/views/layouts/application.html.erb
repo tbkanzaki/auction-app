@@ -12,7 +12,6 @@
     <header>
       <nav class="navbar navbar-expand-lg text-bg-secondary">
         <div class="container-fluid">
-        <%= link_to image_tag("image_text_white_border.png", class: "img-size navbar-brand rounded-circle mx-auto d-block"), root_path %>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -21,41 +20,49 @@
               <li class="nav-item">
                 <%= link_to "Home", root_path, class: "nav-link active text-light" %>
               </li>
-              <% if user_signed_in? && current_user.admin? %>
-                <li class="nav-item">
-                  <%= link_to "Categorias", categories_path, class: "nav-link text-light" %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "Produtos", products_path, class: "nav-link text-light" %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "Controle de Lotes", lots_path, class: "nav-link text-light" %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "Controle de CPF", blocked_cpfs_path, class: "nav-link text-light" %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "Perguntas/Respostas",  lot_doubt_answers_path, class: "nav-link text-light" %>
-                </li>
-              <% end %>
-              <% if user_signed_in? && !current_user.admin? %>
-                <li class="nav-item">
-                  <%= link_to "Meus Lotes", lot_bids_path, class: "nav-link text-light" %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "Meus Favoritos", favorite_lots_path, class: "nav-link text-light" %>
-                </li>
-              <% end %>
-            </ul>
-            <div class="ml-auto d-flex d-flex align-items-center">
               <% if user_signed_in? %>
-                <%= current_user.perfil %> - <%= current_user.name %>
-                <br><%= current_user.email %> 
-                <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: "ms-4 btn btn-light btn-sm me-4" %>
-              <% else %>
-                  <%= link_to 'Entrar', new_user_session_path, class: "ms-4 btn btn-light btn-sm me-4" %> 
+                <% if current_user.admin? %>
+                  <li class="nav-item">
+                    <%= link_to "Categorias", categories_path, class: "nav-link text-light" %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to "Produtos", products_path, class: "nav-link text-light" %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to "Controle de Lotes", lots_path, class: "nav-link text-light" %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to "Controle de CPF", blocked_cpfs_path, class: "nav-link text-light" %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to "Central de Respostas",  lot_doubt_answers_path, class: "nav-link text-light" %>
+                  </li>
+                <% else %>
+                  <li class="nav-item">
+                  <%= link_to "Meus Lotes", lot_bids_path, class: "nav-link text-light" %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to "Meus Favoritos", favorite_lots_path, class: "nav-link text-light" %>
+                  </li>
+                <% end %>
               <% end %>
-            </div>
+              </ul>
+              <div class="ml-auto d-flex align-items-center">
+                <%= form_with(url: search_lots_path, method: :get, class: "d-flex", role: "search") do |f|  %>
+                  <%= f.text_field :query, class: "form-control me-2", placeholder: "Buscar" %>
+                  <%= f.submit 'Buscar', class: "btn btn-light btn-sm me-1"%>
+                <% end %>
+              </div>
+              <div class="ml-auto d-flex d-flex align-items-center">
+                <% if user_signed_in? %>
+                  <%= current_user.perfil %> - <%= current_user.name %>
+                  <br><%= current_user.email %> 
+                  <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: "ms-4 btn btn-light btn-sm me-1" %>
+                <% else %>
+                    <%= link_to 'Entrar', new_user_session_path, class: "ms-4 btn btn-light btn-sm me-1", id: 'login' %> 
+                <% end %>
+              </div>
+            
           </div>
         </div>
       </nav>

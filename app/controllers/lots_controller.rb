@@ -1,11 +1,9 @@
 class LotsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :new, :create, :approved, :closed , :cancelled]
-
   before_action :check_user, only: [:index, :new, :create, :approved, :closed , :cancelled]
   before_action :set_lot, only: [:show, :approved, :closed , :cancelled ]
 
   def index
-    @lots = Lot.order(:start_date, :limit_date)
     @waiting_approval_lots = Lot.waiting_approval.order(:start_date, :limit_date)
     @approved_in_progress_lots = Lot.approved.where("start_date <= ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
     @approved_future_lots = Lot.approved.where("start_date > ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
@@ -72,6 +70,11 @@ class LotsController < ApplicationController
     redirect_to @lot, notice: 'Lote cancelado com sucesso.'
   end
 
+  def search
+    @query = params[:query]
+    @query_lots = Lot.left_outer_joins(:lot_items, :products).where("lots.code LIKE ? OR products.name LIKE ?", "%#{@query}%", "%#{@query}%")
+  end
+  
   private
 
   def set_lot

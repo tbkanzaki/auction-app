@@ -8,9 +8,9 @@ describe 'Usuário se autentica' do
     # Act
     visit('/') 
     click_on 'Entrar'
-    within('form') do
-      fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
-      fill_in 'Senha', with: 'senha1234'
+    fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
+    fill_in 'Senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Entrar'
     end
 
@@ -33,9 +33,9 @@ describe 'Usuário se autentica' do
     # Act
     visit('/') 
     click_on 'Entrar'
-    within('form') do
-      fill_in 'E-mail', with: 'maria@provedor.com'
-      fill_in 'Senha', with: 'senha1234'
+    fill_in 'E-mail', with: 'maria@provedor.com'
+    fill_in 'Senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Entrar'
     end
 
@@ -59,9 +59,11 @@ describe 'Usuário se autentica' do
     # Act
     visit('/') 
     click_on 'Entrar'
-    within('form') do
+    #within(".row .span6") do
+    
       fill_in 'E-mail', with: 'maria@provedor.com'
       fill_in 'Senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Entrar'
     end
 
@@ -77,9 +79,9 @@ describe 'Usuário se autentica' do
     # Act
     visit('/')
     click_on 'Entrar'
-    within('form') do
-      fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
-      fill_in 'Senha', with: 'senha1234'
+    fill_in 'E-mail', with: 'tereza@leilaodogalpao.com.br'
+    fill_in 'Senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Entrar'
     end
     click_on 'Sair'
@@ -100,9 +102,9 @@ describe 'Usuário se autentica' do
     # Act
     visit('/')
     click_on 'Entrar'
-    within('form') do
-      fill_in 'E-mail', with: 'maria@provedor.com'
-      fill_in 'Senha', with: 'senha1234'
+    fill_in 'E-mail', with: 'maria@provedor.com'
+    fill_in 'Senha', with: 'senha1234'
+    within(".actions") do
       click_on 'Entrar'
     end
     click_on 'Sair'
