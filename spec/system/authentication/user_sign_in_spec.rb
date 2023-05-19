@@ -59,10 +59,8 @@ describe 'Usuário se autentica' do
     # Act
     visit('/') 
     click_on 'Entrar'
-    #within(".row .span6") do
-    
-      fill_in 'E-mail', with: 'maria@provedor.com'
-      fill_in 'Senha', with: 'senha1234'
+    fill_in 'E-mail', with: 'maria@provedor.com'
+    fill_in 'Senha', with: 'senha1234'
     within(".actions") do
       click_on 'Entrar'
     end

@@ -4,7 +4,11 @@ class LotDoubtsController < ApplicationController
   before_action :set_lot, only: [:new, :create]
 
   def new
-    @lot_doubt = LotDoubt.new()
+    if (current_user.nil? && !@lot.approved?) || (!current_user.nil? && !current_user.admin? && !@lot.approved?) || (!current_user.nil? && current_user.blocked?)
+      redirect_to root_path, alert: "Você não tem permissão para dar lance neste lote ou precisa estar logado."
+    else
+      @lot_doubt = LotDoubt.new()
+    end
   end
 
   def create

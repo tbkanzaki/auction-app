@@ -2,28 +2,28 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe '#perfil' do
-  it 'exibe o perfil do usuário administrador' do
-    # Arrange
-    user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
+    it 'exibe o perfil do usuário administrador' do
+      # Arrange
+      user = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
 
-    # Act
-    result = user.perfil()
+      # Act
+      result = user.perfil()
 
-    # Assert
-    expect(result).to eq('administrador')
+      # Assert
+      expect(result).to eq('administrador')
+    end
+
+    it 'exibe o perfil do usuário visitante' do
+      # Arrange
+      user = user = User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
+
+      # Act
+      result = user.perfil()
+
+      # Assert
+      expect(result).to eq('visitante')
+    end
   end
-
-  it 'exibe o perfil do usuário visitante' do
-    # Arrange
-    user = user = User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')
-
-    # Act
-    result = user.perfil()
-
-    # Assert
-    expect(result).to eq('visitante')
-  end
-end
 
   describe '#valid?' do
     it 'false quando o cpf já está em uso' do

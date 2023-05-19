@@ -22,8 +22,10 @@ describe 'Usuário visita página de perguntas' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_a)  
+    product_a.blocked!    
     LotItem.create!(lot: lot, product: product_b)   
+    product_b.blocked!    
     lot.approved!
     lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot).update(start_date: 2.days.ago)
@@ -59,8 +61,10 @@ describe 'Usuário visita página de perguntas' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_a)  
+    product_a.blocked!    
     LotItem.create!(lot: lot, product: product_b)   
+    product_b.blocked!    
     lot.approved!
     lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot).update(start_date: 2.days.ago)
@@ -96,8 +100,10 @@ describe 'Usuário visita página de perguntas' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_a)  
+    product_a.blocked!    
     LotItem.create!(lot: lot, product: product_b)   
+    product_b.blocked!    
     lot.approved!
     lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot).update(start_date: 2.days.ago)
@@ -138,8 +144,10 @@ describe 'Usuário visita página de perguntas' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_a)  
+    product_a.blocked!    
     LotItem.create!(lot: lot, product: product_b)   
+    product_b.blocked!    
     lot.approved!
     lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot).update(start_date: 2.days.ago)
@@ -179,8 +187,10 @@ describe 'Usuário visita página de perguntas' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_a)  
+    product_a.blocked!    
     LotItem.create!(lot: lot, product: product_b)   
+    product_b.blocked!   
     lot.approved!
     lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot).update(start_date: 2.days.ago)

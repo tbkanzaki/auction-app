@@ -22,8 +22,10 @@ describe 'Usuário visitante autenticado visita lista de lotes favoritos' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_a)  
+    product_a.blocked!    
     LotItem.create!(lot: lot, product: product_b)   
+    product_b.blocked!    
     lot.approved!
     lot_approver = LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot).update(start_date: 2.days.ago)
@@ -64,8 +66,10 @@ describe 'Usuário visitante autenticado visita lista de lotes favoritos' do
     lot2 = Lot.create!(code:'XYZ123456', start_date: 1.week.from_now, limit_date: 3.weeks.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 10, status: 0, user: user_tereza )
     
-    LotItem.create!(lot: lot1, product: product_a)    
+    LotItem.create!(lot: lot1, product: product_a)  
+    product_a.blocked!    
     LotItem.create!(lot: lot2, product: product_b)   
+    product_b.blocked!     
     lot1.approved!
     lot_approver = LotApprover.create!(lot: lot1, user: user_cristina) 
     lot2.approved!

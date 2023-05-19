@@ -17,7 +17,7 @@ Product.create!(name: 'Celular MotG22',  description: 'Smartphone Motorola Moto 
                 weight: 800, width: 10, height: 15, depth: 5, category: category_b) 
 Product.create!(name: 'Celular MotG42',  description: 'Smartphone Motorola Moto G42 Azul',
                 weight: 800, width: 10, height: 15, depth: 5, category: category_b) 
-Product.create!(name: 'Notebook Asus', description: 'Notebook Asus SAMSUNG', 
+Product.create!(name: 'Notebook Asus', description: 'Notebook Asus', 
                 weight: 5000, width: 100, height: 200, depth: 10, category: category_c)  
     
 Lot.create!(code:'TAB000001', start_date: 1.day.from_now, limit_date: 2.months.from_now, 

@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 describe 'Usuário cadastra lotes' do
+  it 'e precisa estar logado' do
+    #Arrange
+    
+    #Act
+    visit root_path
+    visit lots_path
+
+    #Assert
+    expect(current_path).to eq new_user_session_path
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
+  end
+
   it 'a partir da tela inicial como visitante' do
     #Arrange
     user = User.create!(name: 'Maria Sousa', email:'maria@provedor.com', password:'senha1234', cpf: '66610881090')

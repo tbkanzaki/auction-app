@@ -4,10 +4,11 @@ class LotsController < ApplicationController
   before_action :set_lot, only: [:show, :approved, :closed , :cancelled ]
 
   def index
-    @waiting_approval_lots = Lot.waiting_approval.order(:start_date, :limit_date)
+    @waiting_approval_late_lots = Lot.waiting_approval.where("start_date <= ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
+    @waiting_approval_lots = Lot.waiting_approval.where("start_date > ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
     @approved_in_progress_lots = Lot.approved.where("start_date <= ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
     @approved_future_lots = Lot.approved.where("start_date > ? AND limit_date >= ?", Date.today, Date.today).order(:start_date, :limit_date)
-    @approved_expired_lots = Lot.where("limit_date < ?", Date.today).order(:start_date, :limit_date)
+    @approved_expired_lots = Lot.where("limit_date < ? AND status IN (?, ?)", Date.today, 0, 3).order(:start_date, :limit_date)
     @cancelled_lots = Lot.cancelled.order(:start_date, :limit_date)
     @closed_lots = Lot.closed.order(:start_date, :limit_date)
   end
@@ -29,16 +30,20 @@ class LotsController < ApplicationController
   end
 
   def show
-    @lot_doubts = LotDoubt.where(lot: @lot).unblocked
-    @favorite_lot_user = @lot.favorite_lots.find_by(user_id: current_user.id) if user_signed_in?
-    
-    @lot_bid = Lot.new
-    if @lot.approved?
-      @lot_approver = LotApprover.where(lot_id: @lot).first
-    end
-    @bid_max = LotBid.where(lot_id: @lot).maximum(:bid)
-    if params[:user].present?
-      @winner_user = User.find(params[:user])
+    if (current_user.nil? && !@lot.approved?) || (!current_user.nil? && !current_user.admin? && !@lot.approved?) || (!current_user.nil? && current_user.blocked?)
+      redirect_to root_path, alert: "Você não tem permissão para ver os detalhes deste lote ou precisa estar logado."
+    else
+      @lot_doubts = LotDoubt.where(lot: @lot).unblocked
+      @favorite_lot_user = @lot.favorite_lots.find_by(user_id: current_user.id) if user_signed_in?
+      
+      @lot_bid = Lot.new
+      if @lot.approved?
+        @lot_approver = LotApprover.where(lot_id: @lot).first
+      end
+      @bid_max = LotBid.where(lot_id: @lot).maximum(:bid)
+      if params[:user].present?
+        @winner_user = User.find(params[:user])
+      end
     end
   end
 
@@ -66,6 +71,8 @@ class LotsController < ApplicationController
     @lot.lot_items.each do |item|
       product = Product.find(item.product.id)
       product.unblocked!
+      @lot_item = LotItem.find(item.id)
+      @lot_item.destroy!
     end
     redirect_to @lot, notice: 'Lote cancelado com sucesso.'
   end

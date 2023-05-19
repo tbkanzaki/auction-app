@@ -36,7 +36,7 @@ describe 'Usuário visita página inicial' do
     expect(page).not_to have_content 'TAB000003'
   end
 
-  it 'e não vê a lista de lotes que ainda não foram aprovados, fechados ou cancelados ' do
+  it 'e não logado, não vê a lista de lotes que ainda não foram aprovados, fechados ou cancelados ' do
     #Arrange
     user_tereza = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
 
@@ -60,7 +60,7 @@ describe 'Usuário visita página inicial' do
     expect(page).to have_content 'Não existem lotes no momento.'
   end
 
-  it 'e não visualiza lotes Expirados' do
+  it 'e usuário regular logado, não visualiza lotes Expirados' do
     #Arrange
     user_tereza = User.create!(name: 'Tereza Barros', email:'tereza@leilaodogalpao.com.br', password:'senha1234', cpf: '56685728701')
     user_cristina = User.create!(name: 'Cristina Souza', email:'cristina@leilaodogalpao.com.br', password:'senha1234', cpf: '97458446919')
@@ -81,8 +81,10 @@ describe 'Usuário visita página inicial' do
     lot = Lot.create!(code:'ABC123456', start_date: 1.week.from_now , limit_date: 1.month.from_now, 
                   minimum_bid: 100, minimum_difference_bids: 5, status: 0, user: user_tereza )
     
-    LotItem.create!(lot: lot, product: product_a)    
+    LotItem.create!(lot: lot, product: product_a)  
+    product_a.blocked!    
     LotItem.create!(lot: lot, product: product_b)   
+    product_b.blocked!  
     lot.approved!
     LotApprover.create!(lot: lot, user: user_cristina) 
     Lot.where(id: lot.id).update(start_date: 1.month.ago)
